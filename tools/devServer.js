@@ -4,7 +4,7 @@ import config from './../webpack.config.dev';
 import path from 'path';
 import open from 'open';
 
-const port = 8080;
+const port = 8081;
 const app = express();
 const webpackConfig = webpack(config);
 
@@ -19,7 +19,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './../src/index.html'));
 });
 
-app.listen(port, function(err) {
+app.listen(port, function (err) {
     if (err) {
         console.log(err);
     } else {

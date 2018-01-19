@@ -1,0 +1,5 @@
+
+// export let IS_LOGGED_IN = 'IS_LOGGED_IN';
+export let LOGIN_FAILED = 'LOGIN_FAILED';
+export let LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
+export let LOGIN_PENDING = 'LOGIN_PENDING';
