@@ -1,0 +1,92 @@
+// ---------- Grid colors
+$main_color_bg: #14406F;
+$grid_header_col: #0B3158;
+$row_border: #13406E;
+$row_color:  #0A2A4D;
+$simpleWhiteText: #FFFFFF;
+$simpleBlackText: #000000;
+
+// ----------- Extends
+.grid_text_templat {
+    color: $simpleWhiteText;
+    display: inline-block;
+    font-weight: 300;
+    font-family: Helvetica;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+}
+// ----------
+.grid_container{
+    width: 100%;
+    background-color:  $main_color_bg;
+    min-height:400px;
+
+    span {
+        @extend .grid_text_templat;
+    }
+}
+.grid_row{
+    @extend .grid_text_templat;
+}
+
+.ag-row-editing {
+    color: $simpleBlackText !important;
+}
+
+.ag-header-cell-text {
+    margin: auto;
+} 
+
+.ag-cell {
+    padding-top: 6px !important;
+}
+
+.common_grid_cell {
+    margin: auto;
+    cursor: pointer;
+    a {
+        color: $simpleWhiteText;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    input {
+            background-color: $row_color;
+    }
+}
+
+
+.ag-fresh .ag-ltr .ag-cell-no-focus {
+    border-right: 2px solid $row_border;
+    border-bottom: 1px solid $row_border;
+    border-left: 1px solid transparent;
+} 
+
+
+
+.ag-body-viewport {
+    background-color:  $main_color_bg;
+}
+
+
+.header_description {
+    color: $simpleWhiteText;
+}
+
+
+.ag-header-row {
+    background: #0F5A9B !important;
+    color: #fff;
+    font-weight: 400;
+}
+.wrapper_grid{
+    width: 100%;
+    background-color: $main_color_bg;
+}
+
+
+
+
+

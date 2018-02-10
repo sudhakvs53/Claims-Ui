@@ -6,6 +6,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import configureStore from './configureStore';
 import LoginPage from './pages/login/LoginPage';
+import CreateClaimForm from './pages/CreateClaims/CreateClaimForm';
+import CreateClaimDetails from './pages/CreateClaims/CreateClaimDetails';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap-theme.min.css";
+import "./css/main.css";
+
 import NotFound from './pages/NotFound';
 const store = configureStore();
 
@@ -13,8 +19,9 @@ render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
+        {/* <Route exact path="/" component={LoginPage} /> */}
         {/* <Route exact path="/claimsDB" component={HomePage} /> */}
+        <Route exact path="/" component={CreateClaimForm} />
         <Route component={NotFound} />
       </Switch>
     </Router>

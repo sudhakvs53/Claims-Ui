@@ -1,0 +1,30 @@
+body{
+    margin: 45px;
+    padding: 0;
+    box-sizing: border-box;
+}
+.app {
+    width: 100%;
+   
+}
+
+.titleClass {
+    text-align: center;
+}
+
+.asterisk-input {
+    color: red;
+    font-size: 20px;
+}
+
+.btnClass {
+   margin-left: 0.5cm;
+}
+
+.claimBtn {
+   color: rgb(0,98,143); 
+}
+
+.__react_component_tooltip{
+    width: 30% !important;
+}
