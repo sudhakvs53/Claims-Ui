@@ -27,7 +27,9 @@ class CreateClaimForm extends Component {
         this.handleNeedStateSelection = this.handleNeedStateSelection.bind(this);
         this.handleProductFormSelection = this.handleProductFormSelection.bind(this);
         this.handleButton = this.handleButton.bind(this);
+        this.moveToClaimDetails = this.moveToClaimDetails.bind(this);
 
+        
         this.state = {
             selectedClaimType: '1',
             projTitle: '',
@@ -80,7 +82,7 @@ class CreateClaimForm extends Component {
         return "";
     }
     
-    handleButton = (e) => {
+    handleButton = () => {
         if(this.state.selectedClaimType == 1 && this.state.projTitle!=''&&this.state.needState!=''&&this.state.prdctForm!='')
           return "";
         else if(this.state.selectedClaimType == 2 && this.state.projTitle!=''&&this.state.needState!='')
@@ -91,6 +93,20 @@ class CreateClaimForm extends Component {
           return "disabled";  
            
     }
+
+    moveToClaimDetails = (path) => {
+        
+        if(this.handleButton() === "disabled") return false;
+         
+        this.props.history.push({
+            pathname: path,
+            state: { projTitle: this.state.projTitle,
+                     needState: this.state.needState,
+                     prdctForm: this.state.prdctForm,
+                     claimType: this.state.selectedClaimType
+            }
+          })
+      }
 
     render() {
         return (<div>
@@ -163,7 +179,7 @@ class CreateClaimForm extends Component {
                     <Col sm={3}>  
                       <p>Claim Type:</p>  
                       <ListGroup>
-                        <ListGroupItem className={this.handleListItemSelection(1)} >Product</ListGroupItem>
+                        <ListGroupItem className={this.handleListItemSelection(1)}>Product</ListGroupItem>
                         <ListGroupItem className={this.handleListItemSelection(2)}>Brand</ListGroupItem>
                         <ListGroupItem className={this.handleListItemSelection(3)}>Experience</ListGroupItem>
                       </ListGroup>
@@ -171,7 +187,7 @@ class CreateClaimForm extends Component {
                   </div>    
                   <ButtonToolbar>
                      <Col smOffset={2} sm={12}>
-                       <Button id="button1" type="submit" className={this.handleButton()} bsStyle="primary" >Create New Claim</Button>
+                       <Button id="button1" type="submit" className={this.handleButton()} bsStyle="primary" onClick={() => this.moveToClaimDetails('/claimDetails')} >Create New Claim</Button>
                        <Button type="submit" className="btnClass">Cancel</Button>
                      </Col>
                   </ButtonToolbar>

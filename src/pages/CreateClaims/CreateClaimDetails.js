@@ -1,5 +1,7 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
+import {withRouter} from 'react-router';
+import { connect } from 'react-redux';
+
 import {
     Tabs,
     Tab,
@@ -15,13 +17,21 @@ import {
     DropdownButton,
     ButtonToolbar,
     title,
-    MenuItem
+    MenuItem,
+    Label
 
 } from "react-bootstrap";
 
 class CreateClaimDetails extends React.Component {
     constructor(props, context) {
       super(props, context);
+
+    //   console.log("prj Title: "+this.props.location.state.projTitle);
+    //   console.log("Need State: "+this.props.location.state.needState);
+    //   console.log("Prdct Form: "+this.props.location.state.prdctForm);
+    //   console.log("Claim Type: "+this.props.location.state.claimType);
+
+      
 
       this.handleFormulaSelection = this.handleFormulaSelection.bind(this);
       this.handleSubstantiation = this.handleSubstantiation.bind(this);
@@ -34,8 +44,32 @@ class CreateClaimDetails extends React.Component {
         btnLabel: 'Extract Optiva Data',
         isOptivLabFormula: true,
         substantiationVal: '',
-        substantiationRows: '10'
+        substantiationRows: '10',
+        displaySubstantiationTable: "false",
+        hideSubstantiationTxtArea: "false",
+        needStateVal: this.props.claimHdrData[0].NeedState[this.props.location.state.needState],
+        prdctFormVal: this.props.claimHdrData[1].PrdctForm[this.props.location.state.prdctForm],
+        claimType: this.props.claimHdrData[2].ClaimType[this.props.location.state.claimType],
+
+        claim: '',
+        benefitArea: '',
+        region: '',
+        exception: ''
+
       }
+    }
+
+    handleClaim = (e) => {
+        this.setState({claim: e.target.value});
+    }
+
+    handleBenefitArea = (e) => {
+        var benefitAreaVal = this.props.claimHdrData[3].BenefitArea[e.target.value];
+        this.setState({benefitArea: benefitAreaVal});
+    }
+
+    handleException = (e) => {
+        this.setState({exception: e.target.value});
     }
 
     handleSubstantiation = (e) => {
@@ -55,15 +89,19 @@ class CreateClaimDetails extends React.Component {
         this.setState({formulaSelected: formulaValue});
          
         this.setState({formulaSelected: formulaValue});
-        console.log('Formula Value Selected By User : '+this.state.formulaSelected);
+        //console.log('Formula Value Selected By User : '+this.state.formulaSelected);
     }
 
     handleRegionSelection = (e) => {
 
-        let regionVal = e.target.value;
+        let regionKey = e.target.value;
         //console.log('regionVal'+regionVal);
 
-        this.setState({selectedRegionKey: regionVal});
+        this.setState({selectedRegionKey: regionKey});
+        let regionVal = this.props.claimHdrData[4].Region[regionKey];
+
+        this.setState({region: regionVal});
+        
 
     }
 
@@ -79,16 +117,70 @@ class CreateClaimDetails extends React.Component {
 
     handleSubstantiationRowsChange = (e) => {
        
-         console.log("Rows:"+e.target.value);
+         //console.log("Rows:"+e.target.value);
          this.setState({substantiationRows: e.target.value});
     }
 
     clearInput() {
         document.getElementById('input1').value = "";
     }
-  
+
+    handleSubstantiationClick = (e) => {
+
+       this.setState({hideSubstantiationTxtArea: "true"});
+       this.setState({displaySubstantiationTable: "true"});
+     
+    }
+
+    handleAddSubstantiation = (e) => {
+       this.setState({hideSubstantiationTxtArea: "false"});
+       this.setState({displaySubstantiationTable: "false"});
+    }
+
+    handleCreateClaim = (e) => {
+
+        var claimObject = {
+
+          projTitle         : this.props.location.state.projTitle,
+          needState         : this.state.needStateVal,
+          prdctForm         : this.state.prdctFormVal,
+          claimType         : this.state.claimType,
+          claim             : this.state.claim,
+          benefitArea       : this.state.benefitArea,
+          region            : this.state.region,
+          exception         : this.state.exception,
+          substantiationVal : this.state.substantiationVal
+        }
+        // console.log("Claim: "+this.state.claim);
+        // console.log("Benefit Area: "+this.state.benefitArea);
+        // console.log("Region Selected is: "+this.state.region);
+        // console.log("Exception: "+this.state.exception);
+        // console.log("substantiationVal: "+this.state.substantiationVal);
+    }
+
     render() {
       return (
+           <div>
+            <div sm={6}>    
+             <span> {this.props.location.state.projTitle} </span>
+             <span> | </span>
+             { this.props.location.state.claimType == "1" && 
+               <div>
+                 <p> Product Form: 
+                 <span> {this.state.prdctFormVal} </span> </p>
+               </div>
+             }
+             <p> Need State: 
+             <span> {this.state.needStateVal} </span> </p>
+             <p> Claim Type: 
+             <span> {this.state.claimType} </span> </p>
+             <p> Created By: </p>
+             
+            </div>
+            <div className="pull-right">
+               <Button className="btnClass" type="submit" bsStyle="primary" onClick={this.handleCreateClaim}>Save</Button>
+               <Button className="btnClass">Cancel</Button>
+            </div> 
         <Tabs
           id="controlled-tab-example"
         >
@@ -101,7 +193,7 @@ class CreateClaimDetails extends React.Component {
                      <Col componentClass = {ControlLabel} sm = {2}>
                        Claim:
                      </Col>
-                  <FormControl componentClass="textarea" />
+                  <FormControl componentClass="textarea" onChange={this.handleClaim} value={this.state.claim}/>
                 </FormGroup>
                 <FormGroup controlId="formHorizontalNeedState">
                      <Col componentClass = {ControlLabel} sm = {2}>
@@ -109,11 +201,12 @@ class CreateClaimDetails extends React.Component {
                      </Col> 
                      <Col sm = {8}>
                        <FormControl componentClass = "select" 
-                                    placeholder = "Benefit Area:">
-                         <option value = "1" >Select Benefit Area</option>   
-                         <option value = "2" > Cleansing </option> 
-                         <option value = "3" > Composition/Product Design </option> 
-                         <option value = "4" > Efficacy </option> 
+                                    placeholder = "Benefit Area:"
+                                    onChange={this.handleBenefitArea}>
+                         <option value = "0" >Select Benefit Area</option>   
+                         <option value = "1" > Cleansing </option> 
+                         <option value = "2" > Composition/Product Design </option> 
+                         <option value = "3" > Efficacy </option> 
                        </FormControl>  
                      </Col>    
                 </FormGroup>
@@ -135,13 +228,15 @@ class CreateClaimDetails extends React.Component {
                             Exception:
                      </Col>
                      <Col sm={8}>
-                       <FormControl type="exception" />
+                       <FormControl type="exception" onChange={this.handleException} value={this.state.exception} />
                      </Col>
                   </FormGroup>
                 </Form>
                   </Col>
           </Tab>
-          <Tab eventKey={2} title="   Formula # / Product Spec #    ">
+          {this.props.location.state.claimType == "1"  && 
+          <Tab eventKey={2} title="   Formula # / Product Spec #    "
+               className={this.props.location.state.claimType == "1"?'disabled': ''}>
             <p>Extract Formula # / Product Spec #</p>
             <hr />
             <select onChange={this.handleFormulaSelection}>
@@ -206,10 +301,13 @@ class CreateClaimDetails extends React.Component {
                 </Col>
           </div>      
           </Tab>
+          }
           <Tab eventKey={3} title="   Substantiation   ">
             <p>Add Substantiation (s)</p>
             <hr />
-            <Button className={this.state.substantiationVal == ''?'disabled':''} type="submit" bsStyle="primary">Save Substantiation</Button>
+            {this.state.hideSubstantiationTxtArea != "true" && 
+            <div>
+            <Button className={this.state.substantiationVal == ''?'disabled':''} onClick={this.handleSubstantiationClick} type="submit" bsStyle="primary">Save Substantiation</Button>
             <Button className="btnClass" type="submit">Cancel</Button>
             <Form horizontal>
                 <FormGroup controlId="formHorizontalSubstantiation">
@@ -234,11 +332,45 @@ class CreateClaimDetails extends React.Component {
                        </FormControl>  
                      </Col>
                 </FormGroup>
-            </Form>    
+            </Form>
+            </div>
+            }
+            { this.state.displaySubstantiationTable == "true" &&
+           <div>
+           <Button bsStyle="primary" onClick={this.handleAddSubstantiation}> Add Substantiation </Button>
+           <table border = "1">
+             <tbody>
+               <tr>
+                 <th>Substantiation</th>
+                 <th>File Name</th> 
+                 <th>File Title</th>
+                 <th>Source</th>
+                 <th>Action</th>
+               </tr>
+               <tr>
+                 <td colSpan="1">{this.state.substantiationVal}</td>
+                 <td></td> 
+                 <td></td>
+                 <td></td> 
+                 <td></td>
+               </tr>
+              </tbody> 
+           </table>
+           </div>  
+         }    
           </Tab>
         </Tabs>
+        </div>
       );
     }
   }
+
+  const mapStateToProps = (state) => {
+    return {
+      claimHdrData: state.navToDetail
+    };
+  };
   
-  export default CreateClaimDetails;
+  export default connect(mapStateToProps, null)(CreateClaimDetails);
+  
+  

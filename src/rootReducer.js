@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { navigateToDetail } from './pages/CreateClaims/createClaimReducer';
 // import { itemsHaveError, itemsIsLoading, items } from './reducer';
 import {
   // check_login,
@@ -15,5 +16,6 @@ export default combineReducers({
   login_failed,
   login_successful,
   login_pending,
-  form: reduxFormReducer
+  form: reduxFormReducer,
+  navToDetail: navigateToDetail
 });
