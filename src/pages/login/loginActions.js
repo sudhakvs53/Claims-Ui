@@ -1,6 +1,6 @@
 import {
   // IS_LOGGED_IN,
-  LOGIN_SUCCESSFUL,
+  LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGIN_PENDING
 } from './loginConstants';
@@ -12,10 +12,10 @@ export function login_failed(login_error) {
   };
 }
 
-export function login_successful(login_successful) {
+export function login_success(login_success) {
   return {
-    type: LOGIN_SUCCESSFUL,
-    login_successful
+    type: LOGIN_SUCCESS,
+    login_success
   };
 }
 
@@ -45,12 +45,12 @@ export function login(url, userData) {
 
       dispatch(login_pending(true));
       dispatch(login_failed(null));
-      dispatch(login_successful(null));
+      dispatch(login_success(null));
 
     }).then(resp => resp.json())
       .then(response => {
 
-        dispatch(login_successful(true));
+        dispatch(login_success(true));
         dispatch(login_failed(false));
         dispatch(login_pending(false));
 
@@ -58,7 +58,7 @@ export function login(url, userData) {
       .catch(errData => {
 
         dispatch(login_failed(true));
-        dispatch(login_successful(false));
+        dispatch(login_success(false));
         dispatch(login_pending(false));
 
       });
