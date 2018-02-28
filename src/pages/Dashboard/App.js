@@ -11,7 +11,7 @@ class App extends React.Component {
         this.state = { data: [] };
     }
     componentDidMount() {
-        Helper.fetchData('http://localhost:3002/get_project_claims', "PROJECTTS1501481037939R60").then((data) => {
+        Helper.fetchData('http://localhost:3002/get_project_claims', "12345").then((data) => {
             this.setState({ data });
         });
     }

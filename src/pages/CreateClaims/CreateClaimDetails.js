@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import saveClaims from "../../actions/createClaims";
 
 import {
     Tabs,
@@ -36,7 +38,7 @@ class CreateClaimDetails extends React.Component {
       this.handleFormulaSelection = this.handleFormulaSelection.bind(this);
       this.handleSubstantiation = this.handleSubstantiation.bind(this);
       this.handleSubstantiationRowsChange = this.handleSubstantiationRowsChange.bind(this);
-
+      
       this.state = {
         key: 1,
         selectedRegionKey: '',
@@ -141,16 +143,29 @@ class CreateClaimDetails extends React.Component {
 
         var claimObject = {
 
-          projTitle         : this.props.location.state.projTitle,
-          needState         : this.state.needStateVal,
-          prdctForm         : this.state.prdctFormVal,
-          claimType         : this.state.claimType,
-          claim             : this.state.claim,
-          benefitArea       : this.state.benefitArea,
-          region            : this.state.region,
-          exception         : this.state.exception,
-          substantiationVal : this.state.substantiationVal
+          project_title      : this.props.location.state.projTitle,
+          need_state         : this.state.needStateVal,
+          product_form       : this.state.prdctFormVal,
+          claim_type         : this.state.claimType,
+          claim              : this.state.claim,
+          benefit_area       : this.state.benefitArea,
+          region             : this.state.region,
+          exception          : this.state.exception,
+          substantiation     : this.state.substantiationVal,
+          project_id         : null,
+          formula            : null,
+          created_by         : "ldapadmin1",
+          created_on         : "2018-02-27T11:22:00.738Z",
+          modified_by        : "ldapadmin1",
+          modified_on        : "2018-02-27T11:22:00.738Z",
+          project_id         : "12345"
+          
+
         }
+
+        this.props.saveClaims(claimObject);
+
+        console.log("claimObject: "+ claimObject);
         // console.log("Claim: "+this.state.claim);
         // console.log("Benefit Area: "+this.state.benefitArea);
         // console.log("Region Selected is: "+this.state.region);
@@ -160,6 +175,7 @@ class CreateClaimDetails extends React.Component {
 
     render() {
       return (
+          <div>
            <div>
             <div sm={6}>    
              <span> {this.props.location.state.projTitle} </span>
@@ -175,12 +191,12 @@ class CreateClaimDetails extends React.Component {
              <p> Claim Type: 
              <span> {this.state.claimType} </span> </p>
              <p> Created By: </p>
-             
             </div>
             <div className="pull-right">
-               <Button className="btnClass" type="submit" bsStyle="primary" onClick={this.handleCreateClaim}>Save</Button>
-               <Button className="btnClass">Cancel</Button>
-            </div> 
+                <Button type="submit" onClick={this.handleCreateClaim} bsStyle="primary">Save</Button>
+                <Button className="btnClass">Cancel</Button>
+           </div>
+           </div>
         <Tabs
           id="controlled-tab-example"
         >
@@ -370,7 +386,16 @@ class CreateClaimDetails extends React.Component {
       claimHdrData: state.navToDetail
     };
   };
+
+  function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+      {
+        saveClaims
+      },
+      dispatch
+    );
+  }
   
-  export default connect(mapStateToProps, null)(CreateClaimDetails);
+  export default connect(mapStateToProps, mapDispatchToProps)(CreateClaimDetails);
   
   

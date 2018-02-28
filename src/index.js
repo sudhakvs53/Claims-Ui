@@ -20,12 +20,12 @@ render(
   <Provider store={store}>
     <Router>
       <Switch>
-        {/* <Route exact path="/" component={LoginPage} /> */}
-        {/* <Route exact path="/claimsDB" component={HomePage} /> */}
-        <Route exact path="/" component={App} /> 
-         {/*<Route exact path="/" component={CreateClaimForm} />
+        {/* <Route exact path="/" component={LoginPage} /> 
+         <Route exact path="/claimsDB" component={HomePage} /> 
+         <Route exact path="/" component={App} /> */}
+         <Route exact path="/" component={CreateClaimForm} />
         <Route exact path="/claimDetails" component={CreateClaimDetails} />
-        <Route component={NotFound} /> */}
+       {/* <Route component={NotFound} /> */}
       </Switch>
     </Router>
   </Provider>
