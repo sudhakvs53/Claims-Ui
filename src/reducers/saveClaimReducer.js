@@ -4,24 +4,35 @@ const claims = {
   
   isSaving: false,
   hasSaved: false,
-  summaryData: null,
-  data: []
+  data: [],
+  claim_id: ''
  };
 
-export default function saveClaimReducer(
+export function saveClaimReducer(
   state = claims,
   action
 ) {
   switch (action.type) {
-    case `${types.CLAIM_SAVE}`: {
+    case `${types.CLAIM_SAVE}_PENDING`: // before firing AJAX call
+      return Object.assign({}, state, { isSaving: true, hasSaved: false });
+
+    case `${types.CLAIM_SAVE}_FULFILLED`: {
       // on success
+      
       return Object.assign({}, state, {
-        data: action.payload.Claims,
-        claimId: action.payload.ClaimId,
+        claim_id: action.payload.data.claim_id,
         isSaving: false,
         hasSaved: true
       });
     }
+
+    case `${types.CLAIM_SAVE}_REJECTED`: // show error message
+      return Object.assign({}, state, {
+        errmsg: action.payload.error,
+        isSaving: false,
+        hasSaved: false
+      });
+
     
     default:
       return state;

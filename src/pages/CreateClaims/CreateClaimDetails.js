@@ -3,6 +3,8 @@ import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import saveClaims from "../../actions/createClaims";
+import fetchClaims from "../../actions/fetchClaims";
+
 
 import {
     Tabs,
@@ -20,8 +22,9 @@ import {
     ButtonToolbar,
     title,
     MenuItem,
-    Label
-
+    Label,
+    Image,
+    Table
 } from "react-bootstrap";
 
 class CreateClaimDetails extends React.Component {
@@ -42,16 +45,26 @@ class CreateClaimDetails extends React.Component {
       this.state = {
         key: 1,
         selectedRegionKey: '',
+        selectedFileUpload: '',
         formulaSelected: '1',
         btnLabel: 'Extract Optiva Data',
         isOptivLabFormula: true,
         substantiationVal: '',
+        substantiationArray: [],
         substantiationRows: '10',
         displaySubstantiationTable: "false",
         hideSubstantiationTxtArea: "false",
+        claimsTabClicked: "true",
+        commentsTabClicked: "false",
+        historyTabClicked: "false",
+        showAddClaimLink: "false",
+        displayClaimDetails: "false",
+        prjClaimDetails: [],
+        comments: "",
         needStateVal: this.props.claimHdrData[0].NeedState[this.props.location.state.needState],
         prdctFormVal: this.props.claimHdrData[1].PrdctForm[this.props.location.state.prdctForm],
         claimType: this.props.claimHdrData[2].ClaimType[this.props.location.state.claimType],
+        projectId: this.props.location.state.projectId,
 
         claim: '',
         benefitArea: '',
@@ -113,9 +126,22 @@ class CreateClaimDetails extends React.Component {
           return 'active'
 
         return "";
-
-          
     }
+
+    handleFileUploadOptionSelection = (key) => {
+       
+      if(this.state.selectedFileUpload == key)
+        return 'active'
+
+      return "";
+  }
+
+    handleSaveSubstantiationButton = () => {
+      if(this.state.substantiationVal != '')
+        return "";
+      else  
+        return "disabled";
+    } 
 
     handleSubstantiationRowsChange = (e) => {
        
@@ -129,14 +155,72 @@ class CreateClaimDetails extends React.Component {
 
     handleSubstantiationClick = (e) => {
 
+       if(this.handleSaveSubstantiationButton() === "disabled") return "false";
+
        this.setState({hideSubstantiationTxtArea: "true"});
        this.setState({displaySubstantiationTable: "true"});
+       this.setState({substantiationArray: this.state.substantiationArray.concat(this.state.substantiationVal)})
+       console.log("substantiationArray"+this.state.substantiationArray);
      
     }
 
     handleAddSubstantiation = (e) => {
        this.setState({hideSubstantiationTxtArea: "false"});
        this.setState({displaySubstantiationTable: "false"});
+       this.setState({substantiationVal: ''});
+    }
+
+    handleFileUpload = (e) => {
+        
+        let fileUploadKey = e.target.value;
+
+        this.setState({selectedFileUpload: fileUploadKey});
+    }
+
+    commentsTabHandler = (e) => {
+      this.setState({commentsTabClicked: "true"});
+      this.setState({claimsTabClicked: "false"});
+      this.setState({showAddClaimLink: "false"});
+      this.setState({historyTabClicked: "false"});
+    }
+
+    claimsTabHandler = (e) => {
+      this.setState({claimsTabClicked: "false"});
+      this.setState({showAddClaimLink: "true"});
+      this.setState({commentsTabClicked: "false"});
+      this.setState({historyTabClicked: "false"});
+      this.setState({displayClaimDetails: "false"});
+    }
+
+    historyTabHandler = (e) => {
+
+      this.setState({claimsTabClicked: "false"});
+      this.setState({showAddClaimLink: "false"});
+      this.setState({commentsTabClicked: "false"});
+      this.setState({historyTabClicked: "true"});
+      this.setState({displayClaimDetails: "false"});
+
+    }
+
+    handleAddNewClaim = (e) => {
+      this.setState({claimsTabClicked: "true"});
+      this.setState({showAddClaimLink: "false"});
+      this.setState({displaySubstantiationTable: "false"});
+      this.setState({hideSubstantiationTxtArea: "false"});
+      this.setState({displayClaimDetails: "false"});
+      this.setState({
+        claim: '',
+        benefitArea: '',
+        region: '',
+        exception: '',
+        substantiationVal: '',
+        substantiationArray: []
+    })
+    }
+
+    handleComments = (e) => {
+      let comment = e.target.value;
+      this.setState({comments: comment});
     }
 
     handleCreateClaim = (e) => {
@@ -147,25 +231,48 @@ class CreateClaimDetails extends React.Component {
           need_state         : this.state.needStateVal,
           product_form       : this.state.prdctFormVal,
           claim_type         : this.state.claimType,
-          claim              : this.state.claim,
+          claim_name         : this.state.claim,
           benefit_area       : this.state.benefitArea,
           region             : this.state.region,
           exception          : this.state.exception,
           substantiation     : this.state.substantiationVal,
-          project_id         : null,
           formula            : null,
           created_by         : "ldapadmin1",
           created_on         : "2018-02-27T11:22:00.738Z",
           modified_by        : "ldapadmin1",
           modified_on        : "2018-02-27T11:22:00.738Z",
-          project_id         : "12345"
-          
-
+          project_id         : this.state.projectId,
+          project_status     : "In Progress"
         }
 
-        this.props.saveClaims(claimObject);
+        var histObject = {
+            claim_id: '',
+            claim_name: this.state.claim,
+            description: "des1",
+            modified_on: "2018-02-28"
+        }
 
-        console.log("claimObject: "+ claimObject);
+        var commentObject = {
+            claim_id: '',
+            comment_id: "1234",
+            claim_name: this.state.claim,
+            project_title: this.props.location.state.projTitle,
+            commented_by: "ldapadmin1",
+            commented_on: "2018-02-28T11:22:00.738Z",
+            comment_text: this.state.comments
+        }
+
+        var substObject = {
+            substantiation_id: '',
+            claim_id: '',
+            reason: this.state.substantiationArray,
+            supp_docs: ''
+        }
+
+        this.props.saveClaims(claimObject,histObject,substObject);
+
+        
+        //console.log("claimObject: "+ claimObject);
         // console.log("Claim: "+this.state.claim);
         // console.log("Benefit Area: "+this.state.benefitArea);
         // console.log("Region Selected is: "+this.state.region);
@@ -173,10 +280,48 @@ class CreateClaimDetails extends React.Component {
         // console.log("substantiationVal: "+this.state.substantiationVal);
     }
 
+    componentWillReceiveProps(nextProps) {
+
+      if(nextProps.clmData.hasSaved) {
+         if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
+          this.props.fetchClaims(this.state.projectId);
+       
+
+      if(nextProps.fetchClmData.hasClaimsFetched) {
+         this.setState({prjClaimDetails: nextProps.fetchClmData.data});
+         this.setState({displayClaimDetails: "true"});
+         this.setState({claimsTabClicked: "false"});
+         nextProps.fetchClmData.hasClaimsFetched = false;
+
+      }
+      
+    } 
+    
+    }
+
+    
     render() {
       return (
           <div>
            <div>
+           <div className="pull-right">
+              <span className="spanclass1">
+               <span className="statusImg"></span> 
+               <span className="bottomText">Status</span>
+              </span> 
+              <span className="spanclass">
+               <span className="claimImg" onClick={this.claimsTabHandler}></span>
+               <span className="claimBottomText">Claim</span>
+              </span>
+              <span className="spanclass">
+               <span className="historyImg" onClick={this.historyTabHandler}></span> 
+               <span className="bottomText">History</span>
+              </span> 
+              <span className="spanclass">
+               <span className="commentsImg" onClick={this.commentsTabHandler}></span> 
+               <span className="bottomText">Comments</span>
+              </span>
+            </div> 
             <div sm={6}>    
              <span> {this.props.location.state.projTitle} </span>
              <span> | </span>
@@ -192,11 +337,54 @@ class CreateClaimDetails extends React.Component {
              <span> {this.state.claimType} </span> </p>
              <p> Created By: </p>
             </div>
+            
+            </div>
+          <div>    
             <div className="pull-right">
                 <Button type="submit" onClick={this.handleCreateClaim} bsStyle="primary">Save</Button>
                 <Button className="btnClass">Cancel</Button>
            </div>
-           </div>
+       <div>
+        {this.state.showAddClaimLink == "true" &&
+          <div>
+            <hr/>
+            <Form horizontal>
+               <span>+</span>
+               <span className="addClaimsLink" onClick={this.handleAddNewClaim}> Add New Claim</span>
+            </Form>   
+          </div>  
+        }
+        {this.state.displayClaimDetails == "true" &&
+         <div>
+           <hr/>
+           <Form horizontal>
+              <span>+</span>
+              <span className="addClaimsLink" onClick={this.handleAddNewClaim}> Add New Claim</span>
+              <span/>
+              {this.state.prjClaimDetails.map(claims => (
+              <table border = "1">
+              <tbody>
+              <tr>
+                <th>Claim Id</th>
+                <th>Claim</th> 
+                <th>Benefit Area</th>
+                <th>Regions(s)</th>
+                <th>Action</th>
+              </tr>
+              <tr key={claims.claim_id}>
+              <td colSpan="1">{claims.claim_id}</td>
+              <td colSpan="1">{claims.claim_name}</td> 
+              <td colSpan="1">{claims.benefit_area}</td>
+              <td colSpan="1">{claims.region}</td> 
+              <td colSpan="1"></td>
+              </tr>
+          </tbody>
+          </table>
+          ))}
+         </Form> 
+         </div>
+        }
+        {this.state.claimsTabClicked=="true" && 
         <Tabs
           id="controlled-tab-example"
         >
@@ -323,7 +511,7 @@ class CreateClaimDetails extends React.Component {
             <hr />
             {this.state.hideSubstantiationTxtArea != "true" && 
             <div>
-            <Button className={this.state.substantiationVal == ''?'disabled':''} onClick={this.handleSubstantiationClick} type="submit" bsStyle="primary">Save Substantiation</Button>
+            <Button className={this.handleSaveSubstantiationButton()} onClick={this.handleSubstantiationClick} type="submit" bsStyle="primary">Save Substantiation</Button>
             <Button className="btnClass" type="submit">Cancel</Button>
             <Form horizontal>
                 <FormGroup controlId="formHorizontalSubstantiation">
@@ -334,7 +522,7 @@ class CreateClaimDetails extends React.Component {
                 </FormGroup>
                 <FormGroup controlId="formHorizontalSubstantiationRows">
                      <p>Rows:</p>
-                     <Col sm = {8}>
+                     <Col sm = {2}>
                        <FormControl componentClass = "select" 
                                     placeholder = "Rows:"
                                     onChange={this.handleSubstantiationRowsChange}>
@@ -348,6 +536,54 @@ class CreateClaimDetails extends React.Component {
                        </FormControl>  
                      </Col>
                 </FormGroup>
+                <FormGroup controlId="formHorizontalFileUploadRows" className="fileUpload">
+                   <Col >
+                          <ListGroup>
+                              <ListGroupItem value="1" onClick={this.handleFileUpload} className={this.handleFileUploadOptionSelection(1)}>Upload Support</ListGroupItem>
+                              <ListGroupItem value="2" onClick={this.handleFileUpload} className={this.handleFileUploadOptionSelection(2)}>Link Support</ListGroupItem>
+                              <ListGroupItem value="3" onClick={this.handleFileUpload} className={this.handleFileUploadOptionSelection(3)}>Refer Support</ListGroupItem>
+                              <ListGroupItem value="4" onClick={this.handleFileUpload} className={this.handleFileUploadOptionSelection(4)}>Legacy Support</ListGroupItem>
+                          </ListGroup>
+                   </Col>   
+                </FormGroup>
+                {this.state.selectedFileUpload == "1" &&
+                    <div className="fileUpload1">
+                      <p>Upload Supporting Document</p>
+                      <hr/>
+                      
+                          <Col componentClass={ControlLabel} sm={2}>
+                            File:
+                          </Col>
+                          <Col sm={3}>
+                           <FormControl componentClass="input"/>
+                          </Col>
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Title:
+                          </Col>
+                          <Col sm={3}>
+                           <FormControl componentClass="input"/>
+                          </Col>
+                    </div>   
+                }
+                {this.state.selectedFileUpload == "2" &&
+                    <div className="fileUpload1">
+                      <p>Link Document to CONNECT</p>
+                      <hr/>
+                      
+                          <Col componentClass={ControlLabel} sm={2}>
+                              CONNECT Id:
+                          </Col>
+                          <Col sm={3}>
+                           <FormControl componentClass="input"/>
+                          </Col>
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Title:
+                          </Col>
+                          <Col sm={3}>
+                           <FormControl componentClass="input"/>
+                          </Col>
+                    </div>   
+                }
             </Form>
             </div>
             }
@@ -355,27 +591,75 @@ class CreateClaimDetails extends React.Component {
            <div>
            <Button bsStyle="primary" onClick={this.handleAddSubstantiation}> Add Substantiation </Button>
            <table border = "1">
-             <tbody>
-               <tr>
-                 <th>Substantiation</th>
-                 <th>File Name</th> 
-                 <th>File Title</th>
-                 <th>Source</th>
-                 <th>Action</th>
-               </tr>
-               <tr>
-                 <td colSpan="1">{this.state.substantiationVal}</td>
-                 <td></td> 
-                 <td></td>
-                 <td></td> 
-                 <td></td>
-               </tr>
-              </tbody> 
-           </table>
+           <tbody>
+           <tr>
+             <th>Substantiation</th>
+             <th>File Name</th> 
+             <th>File Title</th>
+             <th>Source</th>
+             <th>Action</th>
+           </tr>
+           
+              {this.state.substantiationArray.map(substantiations => (
+              <tr key={substantiations}>
+              <td colSpan="1">{substantiations}</td>
+              <td></td> 
+              <td></td>
+              <td></td> 
+              <td></td>
+              </tr>
+              ))}
+         
+          </tbody>
+          </table>
            </div>  
          }    
           </Tab>
         </Tabs>
+        }
+        {this.state.historyTabClicked == "true" &&
+          <div>
+            <hr/>
+            <Form horizontal>
+             <Col sm = {8}>
+                       <FormControl componentClass = "select">
+                         <option value = "0" >All</option> 
+                       </FormControl>  
+             </Col>
+             <Table striped bordered condensed>
+             <thead>
+              <tr>
+                <th>Claim</th>
+                <th>Claim Id</th>
+                <th>Description</th>
+                <th>Date</th>
+              </tr>
+             </thead>
+            </Table>
+           </Form>
+          </div>  
+        }
+        {this.state.commentsTabClicked == "true" &&
+         <div>
+           <hr/>
+           <p>Add Comment</p>
+           <Form horizontal>
+           <Col sm = {8}>
+                       <FormControl componentClass = "select">
+                         <option value = "0" >All</option> 
+                       </FormControl>  
+           </Col>
+           <Col sm={8}>    
+                <FormGroup controlId="formHorizontalAddComments">
+                    <FormControl componentClass="textarea" value={this.state.comments} onChange={this.handleComments} className="commentsTab" rows="5"/>
+                </FormGroup>
+           </Col>   
+           </Form>   
+         </div>  
+        
+        }
+        </div>
+        </div>
         </div>
       );
     }
@@ -383,14 +667,17 @@ class CreateClaimDetails extends React.Component {
 
   const mapStateToProps = (state) => {
     return {
-      claimHdrData: state.navToDetail
+      claimHdrData: state.navToDetail,
+      clmData: state.saveClaims,
+      fetchClmData: state.fetchClaims
     };
   };
 
   function mapDispatchToProps(dispatch) {
     return bindActionCreators(
       {
-        saveClaims
+        saveClaims,
+        fetchClaims
       },
       dispatch
     );

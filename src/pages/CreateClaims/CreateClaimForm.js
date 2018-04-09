@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import createProject from "../../actions/createProject";
 import {
     Button, Col,
     Form,
@@ -48,7 +51,7 @@ class CreateClaimForm extends Component {
         
         this.setState({selectedClaimType: e});
 
-        this.setState({projTitle: "Enter a Project Title"});
+        this.setState({projTitle: ""});
 
         
     }
@@ -94,18 +97,50 @@ class CreateClaimForm extends Component {
            
     }
 
-    moveToClaimDetails = (path) => {
-        
+    componentWillReceiveProps(nextProps) {
+
+      if(nextProps.prjData.hasPrjCreated)   {
+
         if(this.handleButton() === "disabled") return false;
          
         this.props.history.push({
-            pathname: path,
-            state: { projTitle: this.state.projTitle,
-                     needState: this.state.needState,
-                     prdctForm: this.state.prdctForm,
-                     claimType: this.state.selectedClaimType
-            }
-          })
+          pathname: '/claimDetails',
+          state: { projTitle: this.state.projTitle,
+                   needState: this.state.needState,
+                   prdctForm: this.state.prdctForm,
+                   claimType: this.state.selectedClaimType,
+                   projectId: nextProps.prjData.prjId
+          }
+        })
+        
+      }  
+
+  }
+
+    moveToClaimDetails = () => {
+
+      var needStateVal = this.props.claimHdrData[0].NeedState[this.state.needState];
+      var prdctFormVal = this.props.claimHdrData[1].PrdctForm[this.state.prdctForm];
+      var claimType    = this.props.claimHdrData[2].ClaimType[this.state.selectedClaimType];
+
+       var prjObject = {
+
+        project_id: '',
+        project_title: this.state.projTitle,
+        need_state: needStateVal,
+        product_form: prdctFormVal,
+        claim_type: claimType,
+        project_status: "New",
+        created_by: "ldapadmin1",
+        created_on: "2018-04-02T11:22:00.738Z",
+        modified_by: "ldapadmin1",
+        modified_on: "2018-04-02T11:22:00.738Z"
+
+       }
+
+       this.props.createProject(prjObject);
+        
+        
       }
 
     render() {
@@ -122,16 +157,16 @@ class CreateClaimForm extends Component {
                 <div className="titleClass">
                     <h4>Create New {this.state.selectedClaimType==1?'Product':this.state.selectedClaimType==2?'Brand':'Experience'} Claim</h4>
                 </div>
+               <div className="form-class"> 
                 <Col sm={7}>    
-                <Form horizontal>
+                <Form horizontal className="form-class1">
                   <FormGroup controlId="formHorizontalProjTitle">
                      <Col componentClass={ControlLabel} sm={2}>
                             Project Title:
                      </Col>
                      <Col sm={8}>
                        <FormControl type="project" placeholder="Enter a Project Title" onChange={this.handleProjTitleInput}
-                                    value={this.state.projTitle}
-                                    ref={(input) => { this.textInput = input; }}/>
+                                    value={this.state.projTitle}/>
                      </Col>
                   </FormGroup>
                   <FormGroup controlId="formHorizontalNeedState">
@@ -176,7 +211,7 @@ class CreateClaimForm extends Component {
                   </Col>
                   <Col sm={5}>
                   <div>
-                    <Col sm={3}>  
+                    <Col sm={3} className="clmtype">  
                       <p>Claim Type:</p>  
                       <ListGroup>
                         <ListGroupItem className={this.handleListItemSelection(1)}>Product</ListGroupItem>
@@ -186,15 +221,33 @@ class CreateClaimForm extends Component {
                     </Col>
                   </div>    
                   <ButtonToolbar>
-                     <Col smOffset={2} sm={12}>
-                       <Button id="button1" type="submit" className={this.handleButton()} bsStyle="primary" onClick={() => this.moveToClaimDetails('/claimDetails')} >Create New Claim</Button>
+                     <Col smOffset={2} sm={12} className="btnclass1">
+                       <Button id="button1" type="submit" className={this.handleButton()} bsStyle="primary" onClick={() => this.moveToClaimDetails()} >Create New Claim</Button>
                        <Button type="submit" className="btnClass">Cancel</Button>
                      </Col>
                   </ButtonToolbar>
                 
                 </Col>
+            </div>
             </div>);
     }
- }      
+ }
+ 
+ const mapStateToProps = (state) => {
+  return {
+    claimHdrData: state.navToDetail,
+    prjData: state.createPrj
+  };
+};
 
-export default CreateClaimForm;
+ function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      createProject
+    },
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateClaimForm);
+

@@ -21,9 +21,9 @@ render(
     <Router>
       <Switch>
         {/* <Route exact path="/" component={LoginPage} /> 
-         <Route exact path="/claimsDB" component={HomePage} /> 
-         <Route exact path="/" component={App} /> */}
-         <Route exact path="/" component={CreateClaimForm} />
+         <Route exact path="/claimsDB" component={HomePage} /> */}
+         <Route exact path="/dashboard" component={App} /> 
+       <Route exact path="/createClaim" component={CreateClaimForm} />
         <Route exact path="/claimDetails" component={CreateClaimDetails} />
        {/* <Route component={NotFound} /> */}
       </Switch>
