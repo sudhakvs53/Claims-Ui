@@ -11,8 +11,7 @@ class Dashboard extends React.Component {
         this.state = { data: [] };
     }
     componentDidMount() {
-        console.log(JSON.stringify(this.state.loginStatus));
-        Helper.fetchData('http://localhost:3002/get_project_claims', "12345").then((data) => {
+        Helper.fetchData('http://localhost:3002/get_project_claims', "1234").then((data) => {
             this.setState({ data });
         });
     }

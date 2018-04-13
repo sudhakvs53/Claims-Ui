@@ -149,7 +149,7 @@ export default class MainGrid extends Component {
             {
                 headerName: "Claim ID",
                 field: "claim_id",
-                //    minWidth: 140,
+                minWidth: 200,
                 cellStyle: { textAlign: "center" },
                 editable: false,
             },
