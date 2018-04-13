@@ -5,6 +5,9 @@ const prj = {
   claimsFetching: false,
   hasClaimsFetched: false,
   hasFetchRejected: false,
+  subsFetching: false,
+  hasSubsFetched:false,
+  hasSubsRejected:false,
   data: []
 };
 
@@ -31,6 +34,25 @@ export default function fetchClaimsReducer(
         hasClaimsFetched: false,
         hasFetchRejected: true
       });
+
+      case `${types.FETCH_SUBS}_PENDING`: // before firing AJAX call
+      return Object.assign({}, state, { subsFetching: true, hasSubsFetched: false });
+
+    case `${types.FETCH_SUBS}_FULFILLED`: {
+      // on success
+      return Object.assign({}, state, {
+        data: action.payload,
+        subsFetching: false,
+        hasSubsFetched: true
+      });
+    }
+    case `${types.FETCH_SUBS}_REJECTED`: // show error message
+      return Object.assign({}, state, {
+        errmsg: action.payload.error,
+        subsFetching: false,
+        hasSubsFetched: false,
+        hasSubsRejected: true
+      }); 
     
       
     default:

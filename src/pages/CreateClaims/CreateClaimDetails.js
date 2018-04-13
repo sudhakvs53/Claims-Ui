@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import saveClaims from "../../actions/createClaims";
 import fetchClaims from "../../actions/fetchClaims";
+import {fetchSubs} from "../../actions/fetchClaims";
 
 
 import {
@@ -60,7 +61,8 @@ class CreateClaimDetails extends React.Component {
         showAddClaimLink: "false",
         displayClaimDetails: "false",
         prjClaimDetails: [],
-        comments: "",
+        titleValue: '',
+        comments: '',
         needStateVal: this.props.claimHdrData[0].NeedState[this.props.location.state.needState],
         prdctFormVal: this.props.claimHdrData[1].PrdctForm[this.props.location.state.prdctForm],
         claimType: this.props.claimHdrData[2].ClaimType[this.props.location.state.claimType],
@@ -141,7 +143,19 @@ class CreateClaimDetails extends React.Component {
         return "";
       else  
         return "disabled";
-    } 
+    }
+
+    handleTitile = (e) => {
+      this.setState({titleValue: e.target.value});
+    }
+
+    fileUploadButtonStatus = () => {
+      if(this.state.titleValue != '')
+        return "";
+      else  
+        return "disabled";
+    }
+
 
     handleSubstantiationRowsChange = (e) => {
        
@@ -285,6 +299,9 @@ class CreateClaimDetails extends React.Component {
       if(nextProps.clmData.hasSaved) {
          if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
           this.props.fetchClaims(this.state.projectId);
+
+          if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.subsFetching && !nextProps.fetchClmData.hasSubsFetched) 
+           this.props.fetchSubs(nextProps.clmData.claim_id);
        
 
       if(nextProps.fetchClmData.hasClaimsFetched) {
@@ -292,7 +309,6 @@ class CreateClaimDetails extends React.Component {
          this.setState({displayClaimDetails: "true"});
          this.setState({claimsTabClicked: "false"});
          nextProps.fetchClmData.hasClaimsFetched = false;
-
       }
       
     } 
@@ -561,12 +577,14 @@ class CreateClaimDetails extends React.Component {
                             Title:
                           </Col>
                           <Col sm={3}>
-                           <FormControl componentClass="input"/>
+                           <FormControl componentClass="input" onChange={this.handleTitile}/>
                           </Col>
+                          <Button className={this.fileUploadButtonStatus()} type="submit"  bsStyle="primary">Upload Support</Button>
+                          <Button className="btnClass">Cancel</Button>
                     </div>   
                 }
                 {this.state.selectedFileUpload == "2" &&
-                    <div className="fileUpload1">
+                    <div className="fileUpload2">
                       <p>Link Document to CONNECT</p>
                       <hr/>
                       
@@ -677,7 +695,8 @@ class CreateClaimDetails extends React.Component {
     return bindActionCreators(
       {
         saveClaims,
-        fetchClaims
+        fetchClaims,
+        fetchSubs,
       },
       dispatch
     );
