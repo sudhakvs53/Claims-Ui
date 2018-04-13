@@ -6,7 +6,7 @@ import saveClaims from "../../actions/createClaims";
 
 import {
     Tabs,
-    Tab,
+    Tab, 
     Button, Col,
     Form,
     FormGroup,

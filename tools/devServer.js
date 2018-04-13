@@ -15,6 +15,21 @@ app.use(require('webpack-dev-middleware')(webpackConfig, {
 
 app.use(require('webpack-hot-middleware')(webpackConfig));
 
+app.use(express.static("public"));
+// app.use(session({
+//     secret: 'work hard',
+//     resave: true,
+//     saveUninitialized: false
+// }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.post('/login',
+//     passport.authenticate('local', { successRedirect: '/',
+//                                    failureRedirect: '/login',
+//                                    failureFlash: true }));
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './../src/index.html'));
 });
