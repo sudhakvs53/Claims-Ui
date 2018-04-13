@@ -1,47 +1,61 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import connect from 'react-redux';
+import {authenticate, loginSuccess} from './loginActions';
+import PropTypes from 'prop-types'
 
-const LoginForm = props => {
-  // console.log('checking simpleForm props obj ', props);
-  const { handleSubmit, pristine, reset, submitting } = props;
+class LoginForm extends React.Component {
+  constructor() {
+    super();
+    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+  }  
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username</label>
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  onLoginSubmit(event) {
+      event.preventDefault();
+      let userCreds = {username: event.target.username.value, password: event.target.password.value};
+      this.props.dispatch(authenticate(userCreds, this.context.router.history));
+  }
+  
+  render() {
+    return (
+      <form onSubmit={this.onLoginSubmit}>
         <div>
-          <Field
-            name="username"
-            component="input"
-            type="text"
-            placeholder="Username"
-          />
-        </div>
-      </div>
-      <div>
-        <div>
-          <label>Password</label>
+          <label>Username</label>
           <div>
             <Field
-              name="password"
+              name="username"
               component="input"
               type="text"
-              placeholder="Password"
+              placeholder="Username"
             />
           </div>
         </div>
-      </div>
-      <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear values
-        </button>
-      </div>
-    </form>
-  );
-};
+        <div>
+          <div>
+            <label>Password</label>
+            <div>
+              <Field
+                name="password"
+                component="input"
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" >
+            Submit
+          </button>
+        </div>
+      </form>
+    )
+  }
+}
 
 export default reduxForm({
   form: 'simple'

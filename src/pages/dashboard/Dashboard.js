@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import MainGrid from "./mainGrid";
 import Helper from "./helper";
 
-class App extends React.Component {
+class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: [] };
@@ -26,4 +26,4 @@ class App extends React.Component {
         );
     }
 }
-export default App;
+export default Dashboard;

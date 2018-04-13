@@ -9,7 +9,7 @@ import {fetchSubs} from "../../actions/fetchClaims";
 
 import {
     Tabs,
-    Tab,
+    Tab, 
     Button, Col,
     Form,
     FormGroup,
