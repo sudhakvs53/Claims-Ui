@@ -16,8 +16,8 @@ import {
     DropdownButton,
     ButtonToolbar,
     title,
-    MenuItem
-    
+    MenuItem,
+    Breadcrumb
     // Checkbox
 } from "react-bootstrap";
 
@@ -144,7 +144,17 @@ class CreateClaimForm extends Component {
       }
 
     render() {
-        return (<div>
+        return (<div className="class1">
+                  <div>
+                     <span className="pull-left clmslogo"></span>
+                     <h3 className="titleClass1">CLAIM MANAGEMENT</h3>
+                  </div>
+                  <div className="class2"> 
+                   <Breadcrumb>
+                      <Breadcrumb.Item className="homeIcon"></Breadcrumb.Item>
+                      <Breadcrumb.Item>Create Claims</Breadcrumb.Item>
+                   </Breadcrumb>
+                  </div> 
                   <div className="pull-right">
                    <DropdownButton
                      title="New"

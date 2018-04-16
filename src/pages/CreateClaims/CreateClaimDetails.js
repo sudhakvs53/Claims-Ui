@@ -25,7 +25,8 @@ import {
     MenuItem,
     Label,
     Image,
-    Table
+    Table,
+    Breadcrumb
 } from "react-bootstrap";
 
 class CreateClaimDetails extends React.Component {
@@ -300,8 +301,8 @@ class CreateClaimDetails extends React.Component {
          if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
           this.props.fetchClaims(this.state.projectId);
 
-          if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.subsFetching && !nextProps.fetchClmData.hasSubsFetched) 
-           this.props.fetchSubs(nextProps.clmData.claim_id);
+          // if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.subsFetching && !nextProps.fetchClmData.hasSubsFetched) 
+          //  this.props.fetchSubs(nextProps.clmData.claim_id);
        
 
       if(nextProps.fetchClmData.hasClaimsFetched) {
@@ -319,6 +320,16 @@ class CreateClaimDetails extends React.Component {
     render() {
       return (
           <div>
+           <div>
+             <span className="pull-left clmslogo"></span>
+             <h3>CLAIM MANAGEMENT</h3>
+           </div>
+           <div> 
+             <Breadcrumb>
+               <Breadcrumb.Item className="homeIcon"></Breadcrumb.Item>
+               <Breadcrumb.Item>Create Claims</Breadcrumb.Item>
+             </Breadcrumb>
+           </div>  
            <div>
            <div className="pull-right">
               <span className="spanclass1">
