@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { navigateToDetail } from './pages/CreateClaims/createClaimReducer';
+import { navigateToDetail } from './components/CreateClaims/createClaimReducer';
 import { saveClaimReducer } from './reducers/saveClaimReducer';
-import { loginStatus } from './pages/login/loginReducer';
+import { loginStatus } from './components/login/loginReducer';
 import { reducer as reduxFormReducer } from 'redux-form';
 import  createProjectReducer  from './reducers/createProjectReducer';
 import fetchClaimsReducer from './reducers/fetchClaimsReducer';
