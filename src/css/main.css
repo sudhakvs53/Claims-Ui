@@ -10,6 +10,8 @@ body{
 
 .titleClass {
     text-align: center;
+    padding-top: 20px;
+    padding-bottom: 5px;
 }
 
 .asterisk-input {
@@ -168,8 +170,17 @@ body{
 
 .btnclass1 {
     margin-top: 50px;
+    margin-left: -10px;
 }
-
+.formHolder{
+    border: 1px solid #ddd;
+    height: 400px;
+    width: 90%;
+    /*margin: 0 auto;*/
+    margin-top: 80px;
+    margin-left: 50px;
+   box-shadow: 10px 10px #888888;
+}
 .addClaimsLink {
     cursor: pointer;
     text-decoration: underline;
@@ -239,6 +250,9 @@ body{
 .class1 {
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
+    
 }
 .titleClass1 {
     
@@ -248,5 +262,6 @@ body{
 }
 
 .class2 {
-    margin-top: 15px;
+    margin-top: 14px;
+    border-top: 3px solid #E7A000 !important;
 }
