@@ -17,7 +17,6 @@ class Dashboard extends React.Component {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
-
             return response;
         }).then((response) => response.json())
             .then((data) => this.setState({ data }));
