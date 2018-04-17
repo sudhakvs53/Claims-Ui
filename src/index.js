@@ -9,8 +9,8 @@ import configureStore from './configureStore';
 
 import LoginPage from './components/login/LoginPage';
 import Dashboard from './components/dashboard/Dashboard';
-import CreateClaimForm from './components/CreateClaims/CreateClaimForm';
-import CreateClaimDetails from './components/CreateClaims/CreateClaimDetails';
+import CreateClaimForm from './components/claims/CreateClaimForm';
+import CreateClaimDetails from './components/claims/CreateClaimDetails';
 import authToken from './components/login/authToken';
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -22,17 +22,17 @@ const store = configureStore();
 
 /*{() => (store.getState().loginStatus.status == LOGIN_SUCCESS?(<Redirect to="/dashboard"/>) : (<LoginPage/>))}*/
 render(
-  <Provider store={store}>
-    <Router>
-      <Switch>
-          { <Route exact path="/" render={() => (authToken.isSet()? (<Redirect to="/dashboard"/>) : (<LoginPage/>))}  /> }
-          { <Route exact path="/login" component={LoginPage} /> }
-          { <Route exact path="/dashboard" component={Dashboard} /> }
-          { <Route exact path="/createClaim" component={CreateClaimForm} /> }
-          { <Route exact path="/claimDetails" component={CreateClaimDetails} /> }
-          {/* <Route component={NotFound} /> */}
-      </Switch>
-    </Router>
-  </Provider>
-  , document.getElementById('app')
+    <Provider store={store}>
+        <Router>
+            <Switch>
+                {<Route exact path="/" render={() => (authToken.isSet() ? (<Redirect to="/dashboard" />) : (<LoginPage />))} />}
+                {<Route exact path="/login" component={LoginPage} />}
+                {<Route exact path="/dashboard" component={Dashboard} />}
+                {<Route exact path="/createClaim" component={CreateClaimForm} />}
+                {<Route exact path="/claimDetails" component={CreateClaimDetails} />}
+                {/* <Route component={NotFound} /> */}
+            </Switch>
+        </Router>
+    </Provider>
+    , document.getElementById('app')
 );

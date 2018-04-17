@@ -33,15 +33,13 @@ class Dashboard extends React.Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return { claimHdrData: state.navToDetail, clmData: state.saveClaims, fetchClmData: state.fetchClaims };
-// };
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators({
-//         fetchAllClaims
-//     }, dispatch);
-// }
+const mapStateToProps = (state) => {
+    return { claimHdrData: state.navToDetail, clmData: state.saveClaims, fetchClmData: state.fetchClaims };
+};
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        fetchAllClaims
+    }, dispatch);
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
-export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
