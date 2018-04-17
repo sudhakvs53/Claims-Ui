@@ -10,7 +10,7 @@ export default function saveClaims(claimData, histData, substData) {
     };
 }
 
-export default function fetchAllClaims() {
+export function fetchAllClaims() {
     return {
         type: `${types.FETCH_ALL_CLAIMS}`,
         payload: {
