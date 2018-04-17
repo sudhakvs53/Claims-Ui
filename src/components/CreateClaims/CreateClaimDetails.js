@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import saveClaims from "../../actions/createClaims";
 import fetchClaims from "../../actions/fetchClaims";
-import {fetchSubs} from "../../actions/fetchClaims";
 
 import {
   Tabs,
@@ -312,10 +311,6 @@ class CreateClaimDetails extends React.Component {
       if (nextProps.clmData.claim_id != '' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
         this.props.fetchClaims(this.state.projectId);
       
-      // if(nextProps.clmData.claim_id!='' && !nextProps.fetchClmData.subsFetching &&
-      // !nextProps.fetchClmData.hasSubsFetched)
-      // this.props.fetchSubs(nextProps.clmData.claim_id);
-
       if (nextProps.fetchClmData.hasClaimsFetched) {
         this.setState({prjClaimDetails: nextProps.fetchClmData.data});
         this.setState({displayClaimDetails: "true"});
@@ -824,7 +819,8 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     saveClaims,
-    fetchClaims,
-    fetchSubs
+    fetchClaims
   }, dispatch);
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateClaimDetails);

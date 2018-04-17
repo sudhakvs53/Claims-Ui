@@ -8,14 +8,14 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/create_claim", claimsData)
             .then(response => {
-                const { status, data } = response;
+                const {status, data} = response;
                 if (isSuccess(status)) {
                     if (response.data.claim_id != null) {
                         histData.claim_id = response.data.claim_id;
-                        CreateClaimsApi.saveClaimsHist(histData);
+                        claimsApi.saveClaimsHist(histData);
                         if (substData.reason != "") {
                             substData.claim_id = response.data.claim_id;
-                            CreateClaimsApi.saveSubstantiation(substData);
+                            claimsApi.saveSubstantiation(substData);
                         }
                     }
                     return response;
@@ -29,17 +29,18 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/insert_history", histData)
             .then(response => {
-                const { status, data } = response;
-                if (isSuccess(status))
+                const {status, data} = response;
+                if (isSuccess(status)) 
                     status;
-            });
+                }
+            );
     }
 
     static saveClaimsComment(commentData) {
         return axios
             .post("http://localhost:3002/insert_comment", commentData)
             .then(response => {
-                const { status, data } = response;
+                const {status, data} = response;
                 if (isSuccess(status)) {
                     return response;
                 }
@@ -51,14 +52,16 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/create_substantiation", substData)
             .then(response => {
-                const { status, data } = response;
-                if (isSuccess(status))
+                const {status, data} = response;
+                if (isSuccess(status)) 
                     status;
-            });
+                }
+            );
     }
 
     static getClaims() {
-        return axios.get('${API_ROOT}/get_project_claims')
+        return axios
+            .get('http://localhost:3002/get_project_claims')
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
