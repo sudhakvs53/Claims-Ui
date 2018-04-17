@@ -1,11 +1,11 @@
 import * as types from "./actionTypes";
-import CreateClaimsApi from "../api/createClaimsApi";
+import claimsApi from "../api/claimsApi";
 
 export default function saveClaims(claimData,histData,substData) {
   return {
     type: `${types.CLAIM_SAVE}`,
     payload: {
-      promise: CreateClaimsApi.saveClaims(claimData,histData,substData)
+      promise: claimsApi.saveClaims(claimData,histData,substData)
     }
   };
 }
