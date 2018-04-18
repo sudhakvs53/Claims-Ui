@@ -1,9 +1,11 @@
 import * as types from "../actions/actionTypes";
 
 const claims = {
-
     isSaving: false,
     hasSaved: false,
+    claimsFetching: false,
+    hasClaimsFetched: false,
+    hasFetchFailed: false,
     data: [],
     claim_id: ''
 };
@@ -33,8 +35,13 @@ export function saveClaimReducer(
                 hasSaved: false
             });
 
-
         default:
             return state;
+    }
+}
+
+export function fetchAllClaims(state = claims, action) {
+    switch (action.type) {
+        case 
     }
 }
