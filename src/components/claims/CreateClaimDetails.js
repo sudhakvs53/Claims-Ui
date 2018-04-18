@@ -20,7 +20,6 @@ import {
     ListGroupItem,
     DropdownButton,
     ButtonToolbar,
-    title,
     MenuItem,
     Label,
     Image,

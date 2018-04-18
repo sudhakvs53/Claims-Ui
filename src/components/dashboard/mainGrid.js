@@ -22,7 +22,7 @@ export default class MainGrid extends Component {
         this.getRowNodeId = this.getRowNodeId.bind(this);
         // this.rowEditableStatus = this.rowEditableStatus.bind(this);
         this.gridOptions = {
-            onModelUpdated: function() {
+            onModelUpdated: function () {
                 console.log('event onModelUpdated received');
             }
 
@@ -34,14 +34,6 @@ export default class MainGrid extends Component {
 
 
     componentWillMount() {
-        //  axios.get(URL)
-        // .then(response => {
-        //     response.data;
-        //     this.setState({
-        //         serverData:  response.data.slice(0,2)
-        //     });
-        //     console.log("GET", response.request.status,"-",response.request.statusText);
-        // });
 
     }
     componentDidMount() {
@@ -52,9 +44,7 @@ export default class MainGrid extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        this.setState({serverData: nextProps.server});
-
+        this.setState({ serverData: nextProps.server });
     }
 
 
@@ -80,84 +70,84 @@ export default class MainGrid extends Component {
             minWidth: 130,
         }
     }
-    
+
     createColumnDefs() {
 
         return [{
-                headerName: "Project Title",
-                field: "project_title",
-                minWidth: 120,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "right" },
-            },
-            {
-                headerName: "Version",
-                field: "project_version",
-                //    minWidth: 140,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "left" },
-            },
-            {
-                headerName: "Type",
-                field: "claim_type",
-                //   minWidth: 130,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "right" },
-            },
-            {
-                headerName: "Need State",
-                field: "need_state",
-                //    minWidth: 140,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "left" },
-            },
-            {
-                headerName: "Region",
-                field: "region",
-                minWidth: 100,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "right" },
-            },
-            {
-                headerName: "Benefit Area",
-                field: "benefit_area",
-                minWidth: 100,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "right" },
-            },
-            {
-                headerName: "Product Form",
-                field: "product_form",
-                minWidth: 100,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "center" },
-            },
-            {
-                headerName: "Status",
-                field: "project_status",
-                minWidth: 100,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "center" },
-            },
-            {
-                headerName: "Claim",
-                field: "claim_name",
-                //    minWidth: 250,
-                editable: params => this.rowEditableStatus(params),
-                cellStyle: { textAlign: "left" },
-            },
-            {
-                headerName: "Claim ID",
-                field: "claim_id",
-                minWidth: 200,
-                cellStyle: { textAlign: "center" },
-                editable: false,
-            },
-            {
-                headerName: "Created By",
-                field: "created_by",
-                minWidth: 100,
-            },
+            headerName: "Project Title",
+            field: "project_title",
+            minWidth: 120,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "right" },
+        },
+        {
+            headerName: "Version",
+            field: "project_version",
+            //    minWidth: 140,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "left" },
+        },
+        {
+            headerName: "Type",
+            field: "claim_type",
+            //   minWidth: 130,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "right" },
+        },
+        {
+            headerName: "Need State",
+            field: "need_state",
+            //    minWidth: 140,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "left" },
+        },
+        {
+            headerName: "Region",
+            field: "region",
+            minWidth: 100,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "right" },
+        },
+        {
+            headerName: "Benefit Area",
+            field: "benefit_area",
+            minWidth: 100,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "right" },
+        },
+        {
+            headerName: "Product Form",
+            field: "product_form",
+            minWidth: 100,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "center" },
+        },
+        {
+            headerName: "Status",
+            field: "project_status",
+            minWidth: 100,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "center" },
+        },
+        {
+            headerName: "Claim",
+            field: "claim_name",
+            //    minWidth: 250,
+            editable: params => this.rowEditableStatus(params),
+            cellStyle: { textAlign: "left" },
+        },
+        {
+            headerName: "Claim ID",
+            field: "claim_id",
+            minWidth: 200,
+            cellStyle: { textAlign: "center" },
+            editable: false,
+        },
+        {
+            headerName: "Created By",
+            field: "created_by",
+            minWidth: 100,
+        },
         ]
 
     }
@@ -187,39 +177,39 @@ export default class MainGrid extends Component {
     }
 
     render() {
-        return ( <div style = {
-                { width: "100%", height: 400 }
-            }
-            className = "grid">
-            <div style = {
+        return (<div style={
+            { width: "100%", height: 400 }
+        }
+            className="grid">
+            <div style={
                 { width: "100%", height: "100%", boxSizing: "border-box" }
             }
-            className = "ag-fresh ">
-            <AgGridReact
-            // properties
-            getRowStyle = { this.state.getRowStyle }
-            columnDefs = { this.state.columnDefs }
-            rowData = { this.state.serverData }
-            defaultColDef = { this.state.defaultColDef }
-            deltaRowDataMode = "true"
-            rowClass = { this.state.rowClass }
-            getRowHeight = { this.state.getRowHeight }
-            headerHeight = { this.state.headerHeight }
-            // rowClassRules             
-            // enableSorting='true'
-            // enableFilter='true'
-            // enableColResize
-            editType = 'fullRow'
-            enableRangeSelection
-            //rowSelection="multiple"                         
-            // events
-            getRowNodeId = { this.getRowNodeId }
-            onGridReady = { this.onGridReady }
-            onGridSizeChanged = { this.onGridSizeChanged } >
-            </AgGridReact>  
-            </div> 
+                className="ag-fresh ">
+                <AgGridReact
+                    // properties
+                    getRowStyle={this.state.getRowStyle}
+                    columnDefs={this.state.columnDefs}
+                    rowData={this.state.serverData}
+                    defaultColDef={this.state.defaultColDef}
+                    deltaRowDataMode="true"
+                    rowClass={this.state.rowClass}
+                    getRowHeight={this.state.getRowHeight}
+                    headerHeight={this.state.headerHeight}
+                    // rowClassRules             
+                    // enableSorting='true'
+                    // enableFilter='true'
+                    // enableColResize
+                    editType='fullRow'
+                    enableRangeSelection
+                    //rowSelection="multiple"                         
+                    // events
+                    getRowNodeId={this.getRowNodeId}
+                    onGridReady={this.onGridReady}
+                    onGridSizeChanged={this.onGridSizeChanged} >
+                </AgGridReact>
             </div>
+        </div>
 
         );
     }
-};
+}

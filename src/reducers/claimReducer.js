@@ -4,8 +4,8 @@ const claims = {
     isSaving: false,
     hasSaved: false,
     claimsFetching: false,
-    hasClaimsFetched: false,
-    hasFetchFailed: false,
+    claimsFetched: false,
+    claimsFetchFailed: false,
     data: [],
     claim_id: ''
 };
@@ -40,8 +40,31 @@ export function saveClaimReducer(
     }
 }
 
-export function fetchAllClaims(state = claims, action) {
+export function fetchAllClaimsReducer(state = claims, action) {
     switch (action.type) {
-        case 
+        case `${types.FETCH_ALL_CLAIMS}_PENDING`: // before firing AJAX call
+            return Object.assign({}, state, { claimsFetching: true, claimsFetched: false, claimsFetchFailed: false });
+
+        case `${types.FETCH_ALL_CLAIMS}_FULFILLED`: {
+            // on success
+
+            return Object.assign({}, state, {
+                data: action.payload.data,
+                claimsFetching: false,
+                claimsFetched: true,
+                claimsFetchFailed: false
+            });
+        }
+
+        case `${types.FETCH_ALL_CLAIMS}_REJECTED`: // show error message
+            return Object.assign({}, state, {
+                message: action.payload.error,
+                claimsFetching: false,
+                claimsFetched: false,
+                claimsFetchFailed: true
+            });
+
+        default:
+            return state;
     }
 }
