@@ -213,8 +213,8 @@ body{
 .clmslogo {
 
     width: 68px;
-    height: 60px;
-    background-size: 61px 57px !important;
+    height: 55px;
+    background-size: 55px 50px !important;
     background-repeat: no-repeat;
     background-color: #E7A000 !important;
     float: left;
@@ -231,12 +231,11 @@ body{
 }
 
 .homeIcon {
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px !important;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px !important;
     background-repeat: no-repeat;
     background-image: url("../images/homeIcon.png");
-    margin: 8px;
     padding: 0;
     border: 0;
     font-weight: inherit;
@@ -264,4 +263,36 @@ body{
 .class2 {
     margin-top: 14px;
     border-top: 3px solid #E7A000 !important;
+}
+
+.statusClass {
+    margin-top: 10px;
+    margin-right: 5px;
+    border-left: 1px solid #666;
+}
+.tabControls {
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.clmDtlsClass {
+    border: 1px solid #666;
+    padding-left: 5px;
+    font-size: 13px;
+}
+
+#controlled-tab-example-pane-1 {
+    border-bottom: 1px solid #666;
+    width: 97%;
+    margin: 0 auto;
+}
+
+.clmTabTitle {
+    padding-left: 10px;
+}
+
+.clmFormClass {
+    margin-top: 10px;
+    border: 1px solid #666;
+    padding-top: 10px;
 }

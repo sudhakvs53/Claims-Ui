@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import React, {Component} from "react";
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
 import saveClaims from "../../actions/claimsAction";
 import fetchClaims from "../../actions/fetchClaims";
 
@@ -80,36 +80,36 @@ class CreateClaimDetails extends React.Component {
     }
 
     handleClaim = (e) => {
-        this.setState({ claim: e.target.value });
+        this.setState({claim: e.target.value});
     }
 
     handleBenefitArea = (e) => {
         var benefitAreaVal = this.props.claimHdrData[3].BenefitArea[e.target.value];
-        this.setState({ benefitArea: benefitAreaVal });
+        this.setState({benefitArea: benefitAreaVal});
     }
 
     handleException = (e) => {
-        this.setState({ exception: e.target.value });
+        this.setState({exception: e.target.value});
     }
 
     handleSubstantiation = (e) => {
         let substantiationValue = e.target.value;
         //console.log(substantiationValue);
-        this.setState({ substantiationVal: substantiationValue });
+        this.setState({substantiationVal: substantiationValue});
     }
 
     handleFormulaSelection = (e) => {
 
         let formulaValue = e.target.value;
-        if (formulaValue == '1' || formulaValue == '2')
-            this.setState({ btnLabel: 'Extract Optiva Data' });
-        else
-            this.setState({ btnLabel: 'Add Data' });
-
+        if (formulaValue == '1' || formulaValue == '2') 
+            this.setState({btnLabel: 'Extract Optiva Data'});
+        else 
+            this.setState({btnLabel: 'Add Data'});
+        
         //console.log(formulaValue);
-        this.setState({ formulaSelected: formulaValue });
+        this.setState({formulaSelected: formulaValue});
 
-        this.setState({ formulaSelected: formulaValue });
+        this.setState({formulaSelected: formulaValue});
         //console.log('Formula Value Selected By User : '+this.state.formulaSelected);
     }
 
@@ -118,16 +118,16 @@ class CreateClaimDetails extends React.Component {
         let regionKey = e.target.value;
         //console.log('regionVal'+regionVal);
 
-        this.setState({ selectedRegionKey: regionKey });
+        this.setState({selectedRegionKey: regionKey});
         let regionVal = this.props.claimHdrData[4].Region[regionKey];
 
-        this.setState({ region: regionVal });
+        this.setState({region: regionVal});
 
     }
 
     handleListItemSelection = (key) => {
 
-        if (this.state.selectedRegionKey == key)
+        if (this.state.selectedRegionKey == key) 
             return 'active'
 
         return "";
@@ -135,34 +135,34 @@ class CreateClaimDetails extends React.Component {
 
     handleFileUploadOptionSelection = (key) => {
 
-        if (this.state.selectedFileUpload == key)
+        if (this.state.selectedFileUpload == key) 
             return 'active'
 
         return "";
     }
 
     handleSaveSubstantiationButton = () => {
-        if (this.state.substantiationVal != '')
+        if (this.state.substantiationVal != '') 
             return "";
-        else
+        else 
             return "disabled";
-    }
-
+        }
+    
     handleTitile = (e) => {
-        this.setState({ titleValue: e.target.value });
+        this.setState({titleValue: e.target.value});
     }
 
     fileUploadButtonStatus = () => {
-        if (this.state.titleValue != '')
+        if (this.state.titleValue != '') 
             return "";
-        else
+        else 
             return "disabled";
-    }
-
+        }
+    
     handleSubstantiationRowsChange = (e) => {
 
         //console.log("Rows:"+e.target.value);
-        this.setState({ substantiationRows: e.target.value });
+        this.setState({substantiationRows: e.target.value});
     }
 
     clearInput() {
@@ -173,11 +173,11 @@ class CreateClaimDetails extends React.Component {
 
     handleSubstantiationClick = (e) => {
 
-        if (this.handleSaveSubstantiationButton() === "disabled")
+        if (this.handleSaveSubstantiationButton() === "disabled") 
             return "false";
-
-        this.setState({ hideSubstantiationTxtArea: "true" });
-        this.setState({ displaySubstantiationTable: "true" });
+        
+        this.setState({hideSubstantiationTxtArea: "true"});
+        this.setState({displaySubstantiationTable: "true"});
         this.setState({
             substantiationArray: this
                 .state
@@ -189,49 +189,49 @@ class CreateClaimDetails extends React.Component {
     }
 
     handleAddSubstantiation = (e) => {
-        this.setState({ hideSubstantiationTxtArea: "false" });
-        this.setState({ displaySubstantiationTable: "false" });
-        this.setState({ substantiationVal: '' });
+        this.setState({hideSubstantiationTxtArea: "false"});
+        this.setState({displaySubstantiationTable: "false"});
+        this.setState({substantiationVal: ''});
     }
 
     handleFileUpload = (e) => {
 
         let fileUploadKey = e.target.value;
 
-        this.setState({ selectedFileUpload: fileUploadKey });
+        this.setState({selectedFileUpload: fileUploadKey});
     }
 
     commentsTabHandler = (e) => {
-        this.setState({ commentsTabClicked: "true" });
-        this.setState({ claimsTabClicked: "false" });
-        this.setState({ showAddClaimLink: "false" });
-        this.setState({ historyTabClicked: "false" });
+        this.setState({commentsTabClicked: "true"});
+        this.setState({claimsTabClicked: "false"});
+        this.setState({showAddClaimLink: "false"});
+        this.setState({historyTabClicked: "false"});
     }
 
     claimsTabHandler = (e) => {
-        this.setState({ claimsTabClicked: "false" });
-        this.setState({ showAddClaimLink: "true" });
-        this.setState({ commentsTabClicked: "false" });
-        this.setState({ historyTabClicked: "false" });
-        this.setState({ displayClaimDetails: "false" });
+        this.setState({claimsTabClicked: "false"});
+        this.setState({showAddClaimLink: "true"});
+        this.setState({commentsTabClicked: "false"});
+        this.setState({historyTabClicked: "false"});
+        this.setState({displayClaimDetails: "false"});
     }
 
     historyTabHandler = (e) => {
 
-        this.setState({ claimsTabClicked: "false" });
-        this.setState({ showAddClaimLink: "false" });
-        this.setState({ commentsTabClicked: "false" });
-        this.setState({ historyTabClicked: "true" });
-        this.setState({ displayClaimDetails: "false" });
+        this.setState({claimsTabClicked: "false"});
+        this.setState({showAddClaimLink: "false"});
+        this.setState({commentsTabClicked: "false"});
+        this.setState({historyTabClicked: "true"});
+        this.setState({displayClaimDetails: "false"});
 
     }
 
     handleAddNewClaim = (e) => {
-        this.setState({ claimsTabClicked: "true" });
-        this.setState({ showAddClaimLink: "false" });
-        this.setState({ displaySubstantiationTable: "false" });
-        this.setState({ hideSubstantiationTxtArea: "false" });
-        this.setState({ displayClaimDetails: "false" });
+        this.setState({claimsTabClicked: "true"});
+        this.setState({showAddClaimLink: "false"});
+        this.setState({displaySubstantiationTable: "false"});
+        this.setState({hideSubstantiationTxtArea: "false"});
+        this.setState({displayClaimDetails: "false"});
         this.setState({
             claim: '',
             benefitArea: '',
@@ -244,7 +244,7 @@ class CreateClaimDetails extends React.Component {
 
     handleComments = (e) => {
         let comment = e.target.value;
-        this.setState({ comments: comment });
+        this.setState({comments: comment});
     }
 
     handleCreateClaim = (e) => {
@@ -307,13 +307,13 @@ class CreateClaimDetails extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         if (nextProps.clmData.hasSaved) {
-            if (nextProps.clmData.claim_id != '' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched)
+            if (nextProps.clmData.claim_id != '' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
                 this.props.fetchClaims(this.state.projectId);
-
+            
             if (nextProps.fetchClmData.hasClaimsFetched) {
-                this.setState({ prjClaimDetails: nextProps.fetchClmData.data });
-                this.setState({ displayClaimDetails: "true" });
-                this.setState({ claimsTabClicked: "false" });
+                this.setState({prjClaimDetails: nextProps.fetchClmData.data});
+                this.setState({displayClaimDetails: "true"});
+                this.setState({claimsTabClicked: "false"});
                 nextProps.fetchClmData.hasClaimsFetched = false;
             }
 
@@ -335,7 +335,7 @@ class CreateClaimDetails extends React.Component {
                     </Breadcrumb>
                 </div>
                 <div>
-                    <div className="pull-right">
+                    <div className="pull-right statusClass">
                         <span className="spanclass1">
                             <span className="statusImg"></span>
                             <span className="bottomText">Status</span>
@@ -353,62 +353,62 @@ class CreateClaimDetails extends React.Component {
                             <span className="bottomText">Comments</span>
                         </span>
                     </div>
-                    <div sm={6}>
+                    <div sm={6} className="clmDtlsClass">
                         <span>
                             {this.props.location.state.projTitle}
                         </span>
                         <span>
                             |
-            </span>
+                        </span>
                         {this.props.location.state.claimType == "1" && <div>
                             <p>
                                 Product Form:
-                <span>
+                                <span>
                                     {this.state.prdctFormVal}
                                 </span>
                             </p>
                         </div>
-                        }
+}
                         <p>
                             Need State:
-              <span>
+                            <span>
                                 {this.state.needStateVal}
                             </span>
                         </p>
                         <p>
                             Claim Type:
-              <span>
+                            <span>
                                 {this.state.claimType}
                             </span>
                         </p>
                         <p>
                             Created By:
-            </p>
+                        </p>
                     </div>
 
                 </div>
                 <div>
-                    <div className="pull-right">
+                    <div className="pull-right tabControls">
                         <Button type="submit" onClick={this.handleCreateClaim} bsStyle="primary">Save</Button>
                         <Button className="btnClass">Cancel</Button>
                     </div>
                     <div>
                         {this.state.showAddClaimLink == "true" && <div>
-                            <hr />
+                            <hr/>
                             <Form horizontal>
                                 <span>+</span>
                                 <span className="addClaimsLink" onClick={this.handleAddNewClaim}>
                                     Add New Claim</span>
                             </Form>
                         </div>
-                        }
+}
                         {this.state.displayClaimDetails == "true" && <div>
-                            <hr />
+                            <hr/>
                             <Form horizontal>
                                 <span>+</span>
                                 <span className="addClaimsLink" onClick={this.handleAddNewClaim}>
                                     Add New Claim</span>
-                                <span /> {this
+                                <span/> {this
                                     .state
                                     .prjClaimDetails
                                     .map(claims => (
@@ -454,31 +454,33 @@ class CreateClaimDetails extends React.Component {
                                                         ))}
                                                 </tbody>
                                             </table>
-                                            <hr />
+                                            <hr/>
                                         </div>
                                     ))}
                             </Form>
                         </div>
-                        }
+}
                         {this.state.claimsTabClicked == "true" && <Tabs id="controlled-tab-example">
                             <Tab eventKey={1} title="   Claim   ">
-                                <p>Claim Details</p>
-                                <hr />
-                                <Col sm={8}>
+                                <p className="clmTabTitle">Claim Details</p>
+
+                                <Col sm={12} className="clmFormClass">
                                     <Form horizontal>
                                         <FormGroup controlId="formHorizontalNeedState">
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Claim:
-                      </Col>
-                                            <FormControl
-                                                componentClass="textarea"
-                                                onChange={this.handleClaim}
-                                                value={this.state.claim} />
+                                            </Col>
+                                            <Col sm={8}>
+                                                <FormControl
+                                                    componentClass="textarea"
+                                                    onChange={this.handleClaim}
+                                                    value={this.state.claim}/>
+                                            </Col>
                                         </FormGroup>
                                         <FormGroup controlId="formHorizontalNeedState">
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Benefit Area:
-                      </Col>
+                                            </Col>
                                             <Col sm={8}>
                                                 <FormControl
                                                     componentClass="select"
@@ -487,20 +489,20 @@ class CreateClaimDetails extends React.Component {
                                                     <option value="0">Select Benefit Area</option>
                                                     <option value="1">
                                                         Cleansing
-                          </option>
+                                                    </option>
                                                     <option value="2">
                                                         Composition/Product Design
-                          </option>
+                                                    </option>
                                                     <option value="3">
                                                         Efficacy
-                          </option>
+                                                    </option>
                                                 </FormControl>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Region:
-                      </Col>
+                                            </Col>
                                             <Col sm={8}>
                                                 <ListGroup>
                                                     <ListGroupItem
@@ -525,12 +527,12 @@ class CreateClaimDetails extends React.Component {
                                         <FormGroup controlId="formHorizontalException">
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Exception:
-                      </Col>
+                                            </Col>
                                             <Col sm={8}>
                                                 <FormControl
                                                     type="exception"
                                                     onChange={this.handleException}
-                                                    value={this.state.exception} />
+                                                    value={this.state.exception}/>
                                             </Col>
                                         </FormGroup>
                                     </Form>
@@ -540,17 +542,17 @@ class CreateClaimDetails extends React.Component {
                                 eventKey={2}
                                 title="   Formula # / Product Spec #    "
                                 className={this.props.location.state.claimType == "1"
-                                    ? 'disabled'
-                                    : ''}>
+                                ? 'disabled'
+                                : ''}>
                                 <p>Extract Formula # / Product Spec #</p>
-                                <hr />
+                                <hr/>
                                 <select onChange={this.handleFormulaSelection}>
                                     <option value="1">Optiva Formula #</option>
                                     <option value="2">Lab Notebook #</option>
                                     <option value="3">Formula Number</option>
                                     <option value="4">Product Specification</option>
                                 </select>
-                                <input id="input1" />
+                                <input id="input1"/>
                                 <Button className="btnClass" type="submit" bsStyle="primary">{this.state.btnLabel}</Button>
                                 <Button className="btnClass" type="submit" onClick={this.clearInput}>Clear</Button>
                                 <div>
@@ -559,61 +561,61 @@ class CreateClaimDetails extends React.Component {
                                             <FormGroup controlId="formHorizontalFormulaTitle">
                                                 <Col componentClass={ControlLabel} sm={2}>
                                                     Formula # / Product Spec #:
-                        </Col>
+                                                </Col>
                                                 <Col sm={8}>
-                                                    <FormControl type="formula" readOnly />
+                                                    <FormControl type="formula" readOnly/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup controlId="formHorizontalLabNotebookTitle">
                                                 <Col componentClass={ControlLabel} sm={2}>
                                                     Lab Notebook #:
-                        </Col>
+                                                </Col>
                                                 <Col sm={8}>
                                                     <FormControl
                                                         type="formula"
                                                         disabled
                                                         ={this.state.formulaSelected == '1' || this.state.formulaSelected == '2'
-                                                            ? true
-                                                            : false} />
+                                                        ? true
+                                                        : false}/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup controlId="formHorizontalRegionTitle">
                                                 <Col componentClass={ControlLabel} sm={2}>
                                                     Region
-                        </Col>
+                                                </Col>
                                                 <Col sm={8}>
                                                     <FormControl
                                                         type="formula"
                                                         disabled
                                                         ={this.state.formulaSelected == '1' || this.state.formulaSelected == '2'
-                                                            ? true
-                                                            : false} />
+                                                        ? true
+                                                        : false}/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup controlId="formHorizontalPrdctNameTitle">
                                                 <Col componentClass={ControlLabel} sm={2}>
                                                     Product Name:
-                        </Col>
+                                                </Col>
                                                 <Col sm={8}>
                                                     <FormControl
                                                         type="formula"
                                                         disabled
                                                         ={this.state.formulaSelected == '1' || this.state.formulaSelected == '2'
-                                                            ? true
-                                                            : false} />
+                                                        ? true
+                                                        : false}/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup controlId="formHorizontalPrjNameTitle">
                                                 <Col componentClass={ControlLabel} sm={2}>
                                                     Project Name:
-                        </Col>
+                                                </Col>
                                                 <Col sm={8}>
                                                     <FormControl
                                                         type="formula"
                                                         disabled
                                                         ={this.state.formulaSelected == '1' || this.state.formulaSelected == '2'
-                                                            ? true
-                                                            : false} />
+                                                        ? true
+                                                        : false}/>
                                                 </Col>
                                             </FormGroup>
                                         </Form>
@@ -626,10 +628,10 @@ class CreateClaimDetails extends React.Component {
                                     </Col>
                                 </div>
                             </Tab>
-                            }
+}
                             <Tab eventKey={3} title="   Substantiation   ">
                                 <p>Add Substantiation (s)</p>
-                                <hr /> {this.state.hideSubstantiationTxtArea != "true" && <div>
+                                <hr/> {this.state.hideSubstantiationTxtArea != "true" && <div>
                                     <Button
                                         className={this.handleSaveSubstantiationButton()}
                                         onClick={this.handleSubstantiationClick}
@@ -640,11 +642,11 @@ class CreateClaimDetails extends React.Component {
                                         <FormGroup controlId="formHorizontalSubstantiation">
                                             <Col sm={2}>
                                                 Substantiation:
-                      </Col>
+                                            </Col>
                                             <FormControl
                                                 componentClass="textarea"
                                                 rows={this.state.substantiationRows}
-                                                onChange={this.handleSubstantiation} />
+                                                onChange={this.handleSubstantiation}/>
                                         </FormGroup>
                                         <FormGroup controlId="formHorizontalSubstantiationRows">
                                             <p>Rows:</p>
@@ -687,19 +689,19 @@ class CreateClaimDetails extends React.Component {
                                         </FormGroup>
                                         {this.state.selectedFileUpload == "1" && <div className="fileUpload1">
                                             <p>Upload Supporting Document</p>
-                                            <hr />
+                                            <hr/>
 
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 File:
-                      </Col>
+                                            </Col>
                                             <Col sm={3}>
-                                                <FormControl componentClass="input" />
+                                                <FormControl componentClass="input"/>
                                             </Col>
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Title:
-                      </Col>
+                                            </Col>
                                             <Col sm={3}>
-                                                <FormControl componentClass="input" onChange={this.handleTitile} />
+                                                <FormControl componentClass="input" onChange={this.handleTitile}/>
                                             </Col>
                                             <Button
                                                 className={this.fileUploadButtonStatus()}
@@ -707,32 +709,32 @@ class CreateClaimDetails extends React.Component {
                                                 bsStyle="primary">Upload Support</Button>
                                             <Button className="btnClass">Cancel</Button>
                                         </div>
-                                        }
+}
                                         {this.state.selectedFileUpload == "2" && <div className="fileUpload2">
                                             <p>Link Document to CONNECT</p>
-                                            <hr />
+                                            <hr/>
 
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 CONNECT Id:
-                      </Col>
+                                            </Col>
                                             <Col sm={3}>
-                                                <FormControl componentClass="input" />
+                                                <FormControl componentClass="input"/>
                                             </Col>
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 Title:
-                      </Col>
+                                            </Col>
                                             <Col sm={3}>
-                                                <FormControl componentClass="input" />
+                                                <FormControl componentClass="input"/>
                                             </Col>
                                         </div>
-                                        }
+}
                                     </Form>
                                 </div>
-                                }
+}
                                 {this.state.displaySubstantiationTable == "true" && <div>
                                     <Button bsStyle="primary" onClick={this.handleAddSubstantiation}>
                                         Add Substantiation
-                  </Button>
+                                    </Button>
                                     <table border="1">
                                         <tbody>
                                             <tr>
@@ -759,12 +761,12 @@ class CreateClaimDetails extends React.Component {
                                         </tbody>
                                     </table>
                                 </div>
-                                }
+}
                             </Tab>
                         </Tabs>
-                        }
+}
                         {this.state.historyTabClicked == "true" && <div>
-                            <hr />
+                            <hr/>
                             <Form horizontal>
                                 <Col sm={8}>
                                     <FormControl componentClass="select">
@@ -783,9 +785,9 @@ class CreateClaimDetails extends React.Component {
                                 </Table>
                             </Form>
                         </div>
-                        }
+}
                         {this.state.commentsTabClicked == "true" && <div>
-                            <hr />
+                            <hr/>
                             <p>Add Comment</p>
                             <Form horizontal>
                                 <Col sm={8}>
@@ -800,12 +802,12 @@ class CreateClaimDetails extends React.Component {
                                             value={this.state.comments}
                                             onChange={this.handleComments}
                                             className="commentsTab"
-                                            rows="5" />
+                                            rows="5"/>
                                     </FormGroup>
                                 </Col>
                             </Form>
                         </div>
-                        }
+}
                     </div>
                 </div>
             </div>
@@ -813,7 +815,7 @@ class CreateClaimDetails extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    return { claimHdrData: state.navToDetail, clmData: state.saveClaims, fetchClmData: state.fetchClaims };
+    return {claimHdrData: state.navToDetail, clmData: state.saveClaims, fetchClmData: state.fetchClaims};
 };
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({

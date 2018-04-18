@@ -10,7 +10,9 @@ import { connect } from 'react-redux';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = {
+            data: []
+        };
     }
 
     componentDidMount() {
@@ -33,6 +35,7 @@ class Dashboard extends React.Component {
         );
     }
 }
+
 
 const mapStateToProps = (state) => {
     return { claims: state.fetchAllClaims };
