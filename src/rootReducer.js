@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { navigateToDetail } from './components/claims/navigateToDetail';
-import { saveClaimReducer } from './reducers/claimReducer';
+import { saveClaimReducer, fetchAllClaimsReducer } from './reducers/claimReducer';
 import { loginStatus } from './components/login/loginReducer';
 import { reducer as reduxFormReducer } from 'redux-form';
 import createProjectReducer from './reducers/createProjectReducer';
@@ -12,5 +12,7 @@ export default combineReducers({
     navToDetail: navigateToDetail,
     saveClaims: saveClaimReducer,
     createPrj: createProjectReducer,
-    fetchClaims: fetchClaimsReducer
+    fetchClaims: fetchClaimsReducer,
+    saveClaim: saveClaimReducer,
+    fetchAllClaims: fetchAllClaimsReducer
 });

@@ -8,7 +8,7 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/create_claim", claimsData)
             .then(response => {
-                const {status, data} = response;
+                const { status, data } = response;
                 if (isSuccess(status)) {
                     if (response.data.claim_id != null) {
                         histData.claim_id = response.data.claim_id;
@@ -29,10 +29,10 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/insert_history", histData)
             .then(response => {
-                const {status, data} = response;
-                if (isSuccess(status)) 
+                const { status, data } = response;
+                if (isSuccess(status))
                     status;
-                }
+            }
             );
     }
 
@@ -40,7 +40,7 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/insert_comment", commentData)
             .then(response => {
-                const {status, data} = response;
+                const { status, data } = response;
                 if (isSuccess(status)) {
                     return response;
                 }
@@ -52,23 +52,16 @@ class claimsApi {
         return axios
             .post("http://localhost:3002/create_substantiation", substData)
             .then(response => {
-                const {status, data} = response;
-                if (isSuccess(status)) 
+                const { status, data } = response;
+                if (isSuccess(status))
                     status;
-                }
+            }
             );
     }
 
     static getClaims() {
         return axios
-            .get('http://localhost:3002/get_project_claims')
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-
-                return response;
-            });
+            .get('http://localhost:3002/get_all_claims');
     }
 }
 
