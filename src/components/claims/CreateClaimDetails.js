@@ -643,10 +643,12 @@ class CreateClaimDetails extends React.Component {
                                             <Col sm={2}>
                                                 Substantiation:
                                             </Col>
-                                            <FormControl
-                                                componentClass="textarea"
-                                                rows={this.state.substantiationRows}
-                                                onChange={this.handleSubstantiation}/>
+                                            <Col sm={8}>
+                                                <FormControl
+                                                    componentClass="textarea"
+                                                    rows={this.state.substantiationRows}
+                                                    onChange={this.handleSubstantiation}/>
+                                            </Col>
                                         </FormGroup>
                                         <FormGroup controlId="formHorizontalSubstantiationRows">
                                             <p>Rows:</p>
