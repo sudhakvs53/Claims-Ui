@@ -3,6 +3,7 @@ import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/theme-fresh.css';
 import ReactTooltip from 'react-tooltip';
 import MainGrid from './mainGrid';
+import Header from './Header.js';
 import { fetchAllClaims } from '../../actions/claimsAction';
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
@@ -27,7 +28,7 @@ class Dashboard extends React.Component {
 
     render() {
         return (<div className="wrapper_grid">
-            <span className="header_description">Claims</span>
+            <Header />
             <div className="grid_container">
                 <MainGrid server={this.state.data} />
             </div>

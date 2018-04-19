@@ -16,11 +16,11 @@ import authToken from './components/login/authToken';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-theme.min.css";
 import "./css/main.css";
+import "./css/header.css";
 
 import NotFound from './components/NotFound';
 const store = configureStore();
 
-/*{() => (store.getState().loginStatus.status == LOGIN_SUCCESS?(<Redirect to="/dashboard"/>) : (<LoginPage/>))}*/
 render(
     <Provider store={store}>
         <Router>
