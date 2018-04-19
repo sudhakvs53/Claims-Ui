@@ -405,56 +405,55 @@ class CreateClaimDetails extends React.Component {
                         {this.state.displayClaimDetails == "true" && <div>
                             <hr/>
                             <Form horizontal>
-                                <span>+</span>
+                                <span className="newClaimLink">+</span>
                                 <span className="addClaimsLink" onClick={this.handleAddNewClaim}>
                                     Add New Claim</span>
                                 <span/> {this
                                     .state
                                     .prjClaimDetails
                                     .map(claims => (
-                                        <div>
-                                            <table border="1">
+                                        <div className="clmInfo">
+                                            <table className="clmTable">
                                                 <tbody>
                                                     <tr>
-                                                        <th>Claim Id</th>
-                                                        <th>Claim</th>
-                                                        <th>Benefit Area</th>
-                                                        <th>Regions(s)</th>
-                                                        <th>Action</th>
+                                                        <th className="clmId">Claim Id</th>
+                                                        <th className="clmName">Claim</th>
+                                                        <th className="benefitArea">Benefit Area</th>
+                                                        <th className="regions">Regions(s)</th>
+                                                        <th className="clmAction">Action</th>
                                                     </tr>
                                                     <tr key={claims.claim_id}>
-                                                        <td colSpan="1">{claims.claim_id}</td>
-                                                        <td colSpan="1">{claims.claim_name}</td>
-                                                        <td colSpan="1">{claims.benefit_area}</td>
-                                                        <td colSpan="1">{claims.region}</td>
-                                                        <td colSpan="1"></td>
+                                                        <td className="tdclass1">{claims.claim_id}</td>
+                                                        <td className="tdclass1">{claims.claim_name}</td>
+                                                        <td className="tdclass1">{claims.benefit_area}</td>
+                                                        <td className="tdclass1">{claims.region}</td>
+                                                        <td className="tdclass1"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <table border="1">
+                                            <table className="subTable2">
                                                 <tbody>
                                                     <tr>
-                                                        <th>Substantiation</th>
-                                                        <th>File Name</th>
-                                                        <th>File Title</th>
-                                                        <th>Source</th>
-                                                        <th>Size</th>
+                                                        <th className="subheader">Substantiation</th>
+                                                        <th className="fname">File Name</th>
+                                                        <th className="ftitle">File Title</th>
+                                                        <th className="fsource">Source</th>
+                                                        <th className="action">Size</th>
                                                     </tr>
                                                     {claims
                                                         .substantiation
                                                         .map(substantiations => (
 
                                                             <tr key={substantiations}>
-                                                                <td colSpan="1">{substantiations}</td>
-                                                                <td colSpan="1"></td>
-                                                                <td colSpan="1"></td>
-                                                                <td colSpan="1"></td>
-                                                                <td colSpan="1"></td>
+                                                                <td className="tdclass">{substantiations}</td>
+                                                                <td className="tdclass"></td>
+                                                                <td className="tdclass"></td>
+                                                                <td className="tdclass"></td>
+                                                                <td className="tdclass"></td>
                                                             </tr>
                                                         ))}
                                                 </tbody>
                                             </table>
-                                            <hr/>
                                         </div>
                                     ))}
                             </Form>
@@ -630,30 +629,31 @@ class CreateClaimDetails extends React.Component {
                             </Tab>
 }
                             <Tab eventKey={3} title="   Substantiation   ">
-                                <p>Add Substantiation (s)</p>
-                                <hr/> {this.state.hideSubstantiationTxtArea != "true" && <div>
+                                <p className="subTitle">Add Substantiation (s)</p>
+                                {this.state.hideSubstantiationTxtArea != "true" && <div>
                                     <Button
                                         className={this.handleSaveSubstantiationButton()}
                                         onClick={this.handleSubstantiationClick}
                                         type="submit"
+                                        className="subButton"
                                         bsStyle="primary">Save Substantiation</Button>
-                                    <Button className="btnClass" type="submit">Cancel</Button>
-                                    <Form horizontal>
+                                    <Button className="subButton" type="submit">Cancel</Button>
+                                    <Form horizontal className="subFormClass">
                                         <FormGroup controlId="formHorizontalSubstantiation">
                                             <Col sm={2}>
                                                 Substantiation:
                                             </Col>
-                                            <Col sm={8}>
+                                            <Col sm={8} className="txtAreaClass">
                                                 <FormControl
                                                     componentClass="textarea"
                                                     rows={this.state.substantiationRows}
                                                     onChange={this.handleSubstantiation}/>
                                             </Col>
-                                        </FormGroup>
-                                        <FormGroup controlId="formHorizontalSubstantiationRows">
-                                            <p>Rows:</p>
+
                                             <Col sm={2}>
+                                                <span>Rows:</span>
                                                 <FormControl
+                                                    className="rowSelect"
                                                     componentClass="select"
                                                     placeholder="Rows:"
                                                     onChange={this.handleSubstantiationRowsChange}>
@@ -734,34 +734,39 @@ class CreateClaimDetails extends React.Component {
                                 </div>
 }
                                 {this.state.displaySubstantiationTable == "true" && <div>
-                                    <Button bsStyle="primary" onClick={this.handleAddSubstantiation}>
+                                    <Button
+                                        className="subButton"
+                                        bsStyle="primary"
+                                        onClick={this.handleAddSubstantiation}>
                                         Add Substantiation
                                     </Button>
-                                    <table border="1">
-                                        <tbody>
-                                            <tr>
-                                                <th>Substantiation</th>
-                                                <th>File Name</th>
-                                                <th>File Title</th>
-                                                <th>Source</th>
-                                                <th>Action</th>
-                                            </tr>
+                                    <div className="subTable">
+                                        <table className="subTable1">
+                                            <tbody>
+                                                <tr>
+                                                    <th className="subheader">Substantiation</th>
+                                                    <th className="fname">File Name</th>
+                                                    <th className="ftitle">File Title</th>
+                                                    <th className="fsource">Source</th>
+                                                    <th className="action">Action</th>
+                                                </tr>
 
-                                            {this
-                                                .state
-                                                .substantiationArray
-                                                .map(substantiations => (
-                                                    <tr key={substantiations}>
-                                                        <td colSpan="1">{substantiations}</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                ))}
+                                                {this
+                                                    .state
+                                                    .substantiationArray
+                                                    .map(substantiations => (
+                                                        <tr key={substantiations}>
+                                                            <td className="tdclass">{substantiations}</td>
+                                                            <td className="tdclass"></td>
+                                                            <td className="tdclass"></td>
+                                                            <td className="tdclass"></td>
+                                                            <td className="tdclass"></td>
+                                                        </tr>
+                                                    ))}
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
 }
                             </Tab>
