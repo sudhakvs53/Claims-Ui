@@ -31,8 +31,6 @@ body{
     width: 30% !important;
 }
 
-
-
 .spanclass {
     
     position: relative;
@@ -70,6 +68,42 @@ body{
     cursor: pointer;
     background: url("../images/Stage_1.png");
 
+}
+
+.clmslogo {
+
+    width: 68px;
+    height: 55px;
+    background-size: 55px 50px !important;
+    background-repeat: no-repeat;
+    background-color: #E7A000 !important;
+    float: left;
+    margin-right: 5px;
+    background-position: 2px;
+    background-image: url("../images/claims_new.png");
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    box-sizing: border-box;
+    line-height: 57px;
+}
+
+.homeIcon {
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px !important;
+    background-repeat: no-repeat;
+    background-image: url("../images/home_icon.png");
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    box-sizing: border-box;
+    line-height: 20px;
+    vertical-align: middle;
+    cursor: pointer;    
 }
 
 .claimBottomText {
@@ -208,42 +242,6 @@ body{
     margin-top: -35px;
     position: relative;
     top: -80px;
-}
-
-.clmslogo {
-
-    width: 68px;
-    height: 55px;
-    background-size: 55px 50px !important;
-    background-repeat: no-repeat;
-    background-color: #E7A000 !important;
-    float: left;
-    margin-right: 5px;
-    background-position: 2px;
-    background-image: url("../images/claimNew.png");
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    box-sizing: border-box;
-    line-height: 57px;
-}
-
-.homeIcon {
-    width: 25px;
-    height: 25px;
-    background-size: 25px 25px !important;
-    background-repeat: no-repeat;
-    background-image: url("../images/homeIcon.png");
-    padding: 0;
-    border: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    box-sizing: border-box;
-    line-height: 20px;
-    vertical-align: middle;
-    cursor: pointer;    
 }
 
 .class1 {

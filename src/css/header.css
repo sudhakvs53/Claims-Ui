@@ -1,0 +1,216 @@
+.claim-logo {
+	width: 68px;
+	height: 60px;
+	background-image: url(../images/claims_new.png)
+		!important;
+	background-size: 61px 57px !important;
+	background-repeat: no-repeat;
+	background-color: #E7A000 !important;
+	float: left;
+	margin-right: 5px;
+	background-position: 2px;
+}
+
+.logo-div {
+	height: 60px;
+	width: 350px !important;
+	font-size: 17px;
+    font-family: AkzidenzGrotesk;
+    width: 250px;
+}
+
+.center-div {
+	position: absolute;
+	left: 50%;
+	width: 610px;
+	margin-left: -300px;
+	top: 2px
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.claim-searchbar {
+	margin-top: 11px
+}
+
+.claim-search-list {
+	padding: 0 8px;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	color: #000;
+	font-weight: normal;
+	height: 35px;
+	width: 140px;
+	-moz-appearance: none;
+	border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    border-right: 0px !important;
+}
+
+.claim-search-list:hover {
+	color: #2D86C2;
+	cursor: pointer
+}
+
+.claim-index-search-button {
+	border: 0 none;
+	border-radius: 0 7px 7px 0;
+	background: #00628f none repeat scroll 0 0 !important;
+	height: 35px;
+	position: absolute;
+	color: #fff !important;
+	margin-top: 0;
+	width: 42px
+}
+
+.claim-index-search-button:hover {
+	background: #2D86C2 none repeat scroll 0 0 !important;
+	color: #fff
+}
+
+.navbar {
+	background: #FFF none repeat scroll 0 0 !important;
+    border-bottom: 3px solid #E7A000 !important;
+    width: 100%
+}
+
+.w-icon {
+	width: 71px !important;
+	height: 90px !important;
+	border-radius: 3px;
+	margin-left: 10px !important;
+}
+
+.uui-ui {
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: #01628F;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 3px -1px;
+	background-image: url(../images/uui_icon.png);
+}
+
+.w-icon .uui_text {
+	width: 100%;
+	text-align: center;
+	font-size: 15px !important;
+	cursor: pointer;
+	line-height: 11px !important;
+	margin-top: 2px !important;
+	float: left;
+}
+
+.concerto-ui {
+	background-image: url(../images/concerto_icon.png);
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: #209E14;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 2px -2px;
+}
+
+.capri-ui {
+	background-image: url(../images/capri_icon.png);
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: #D92E2C;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 2px -3px;
+}
+
+.rm-ui {
+	background-image: url(../images/rm_module_icon.png);
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: #A2156E;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 3px -2px;
+}
+
+.element-ui {
+	background-image: url(../images/element_icon.png);
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: #14969B;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 2px -3px;
+}
+
+.edrat-ui {
+	background-image: url(../images/edrat_icon.png);
+	width: 68px !important;
+	height: 55px;
+	float: left;
+	margin: 6px;
+	cursor: pointer;
+	background-color: rgba(82, 4, 161, 0.91);
+	border-radius: 6px;
+	background-repeat: no-repeat;
+	background-position: 2px -3px;
+}
+
+.rm-welcomebar .dropdown-menu {
+	height: auto;
+}
+
+.rm-welcomebar {
+	margin-top: 10px;
+}
+
+#drop-signout>span,#drop-signout>span>span {
+	color: #2D86C2;
+	text-decoration: underline;
+}
+
+#drop-signout>span,#drop-signout>span>span {
+	color: #2D86C2;
+	text-decoration: underline;
+}
+
+.dropdown-menu-transition {
+	opacity: 0;
+	-webkit-transform-origin: top;
+	transform-origin: top;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-transform: scale(1, 0);
+	display: block;
+	transition: all 0.3s linear;
+	-webkit-transition: all 0.3s linear;
+}
+
+.open>.dropdown-menu-transition {
+	-webkit-transform: scale(1, 1);
+	transform: scale(1, 1);
+	opacity: 1;
+}
+
+.radius-user .rm-utility-menu {
+	font-size: .923em;
+	line-height: 1.077em;
+	font-weight: 400;
+	color: #FFF;
+	margin-top: 17px
+}

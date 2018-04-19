@@ -1,6 +1,6 @@
 import express from 'express';
 import webpack from 'webpack';
-import config from './../webpack.config.dev';
+import config from './webpack.config.dev';
 import path from 'path';
 import open from 'open';
 
@@ -15,10 +15,10 @@ app.use(require('webpack-dev-middleware')(webpackConfig, {
 
 app.use(require('webpack-hot-middleware')(webpackConfig));
 
-app.use(express.static("public"));
+app.use('/public', express.static('./src/images'));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './../src/index.html'));
+    res.sendFile(path.join(__dirname, './src/index.html'));
 });
 
 app.listen(port, function (err) {

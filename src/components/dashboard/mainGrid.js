@@ -2,7 +2,6 @@
 import React, { PropTypes, Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 
-
 export default class MainGrid extends Component {
     constructor(props) {
         super(props);
@@ -30,17 +29,6 @@ export default class MainGrid extends Component {
     }
     rowHeight() {
         return 31
-    }
-
-
-    componentWillMount() {
-
-    }
-    componentDidMount() {
-
-    }
-    componentDidUpdate(prevProps, prevState) {
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -177,38 +165,39 @@ export default class MainGrid extends Component {
     }
 
     render() {
-        return (<div style={
-            { width: "100%", height: 400 }
-        }
-            className="grid">
+        return (
             <div style={
-                { width: "100%", height: "100%", boxSizing: "border-box" }
+                { width: "100%", height: 400 }
             }
-                className="ag-fresh ">
-                <AgGridReact
-                    // properties
-                    getRowStyle={this.state.getRowStyle}
-                    columnDefs={this.state.columnDefs}
-                    rowData={this.state.serverData}
-                    defaultColDef={this.state.defaultColDef}
-                    deltaRowDataMode="true"
-                    rowClass={this.state.rowClass}
-                    getRowHeight={this.state.getRowHeight}
-                    headerHeight={this.state.headerHeight}
-                    // rowClassRules             
-                    // enableSorting='true'
-                    // enableFilter='true'
-                    // enableColResize
-                    editType='fullRow'
-                    enableRangeSelection
-                    //rowSelection="multiple"                         
-                    // events
-                    getRowNodeId={this.getRowNodeId}
-                    onGridReady={this.onGridReady}
-                    onGridSizeChanged={this.onGridSizeChanged} >
-                </AgGridReact>
+                className="grid">
+                <div style={
+                    { width: "100%", height: "100%", boxSizing: "border-box" }
+                }
+                    className="ag-fresh ">
+                    <AgGridReact
+                        // properties
+                        getRowStyle={this.state.getRowStyle}
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.state.serverData}
+                        defaultColDef={this.state.defaultColDef}
+                        deltaRowDataMode="true"
+                        rowClass={this.state.rowClass}
+                        getRowHeight={this.state.getRowHeight}
+                        headerHeight={this.state.headerHeight}
+                        // rowClassRules             
+                        // enableSorting='true'
+                        // enableFilter='true'
+                        // enableColResize
+                        editType='fullRow'
+                        enableRangeSelection
+                        //rowSelection="multiple"                         
+                        // events
+                        getRowNodeId={this.getRowNodeId}
+                        onGridReady={this.onGridReady}
+                        onGridSizeChanged={this.onGridSizeChanged} >
+                    </AgGridReact>
+                </div>
             </div>
-        </div>
 
         );
     }
