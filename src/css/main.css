@@ -476,3 +476,13 @@ body{
     padding-left: 10px;
 }
 
+#login-panel {
+    width: 40%;
+    margin: 50px
+}
+
+#login-panel input, button{
+    width: 80%;
+    margin-left: 10%;
+}
+

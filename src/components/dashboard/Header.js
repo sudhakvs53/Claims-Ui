@@ -36,7 +36,7 @@ export default class Header extends React.Component {
                     <Nav>
                         <Navbar.Form>
                             <FormControl componentClass="select">
-                                <option selected>Project</option>
+                                <option>Project</option>
                                 <option>Product Name</option>
                                 <option>Claim</option>
                                 <option>Substantiation</option>
@@ -45,7 +45,7 @@ export default class Header extends React.Component {
                             </FormControl>
                             <FormGroup>
                                 <FormControl className="claim-searchtext pull-left" type="text" placeholder="Enter Keywords" />
-                                <Button onClick={this.handleBasicSearch} className="btn btn-default claim-index-search-button pull-left" disabled="true ">
+                                <Button onClick={this.handleBasicSearch} className="btn btn-default claim-index-search-button pull-left" >
                                     <i className="glyphicon glyphicon-search" />
                                 </Button>
                             </FormGroup>
@@ -54,8 +54,8 @@ export default class Header extends React.Component {
                     <Nav pullRight>
 
                         <Navbar.Text className="user-icon" />
-                        <NavDropdown title="rensetty" className="user-dropdown">
-                            <MenuItem style={{ 'padding-left': '0px' }}>Sign Out</MenuItem>
+                        <NavDropdown id="profile_drop" title="rensetty" className="user-dropdown">
+                            <MenuItem>Sign Out</MenuItem>
                         </NavDropdown>
                         <Navbar.Text className="question" />
                         <Navbar.Text className="help-link">

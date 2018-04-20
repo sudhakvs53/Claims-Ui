@@ -42,12 +42,12 @@ class Dashboard extends React.Component {
                 </Row>
                 <Row className="sub-nav">
                     <Col componentClass="span" >
-                        <Breadcrumb pullRight className="breadcrumbs">
+                        <Breadcrumb className="breadcrumbs">
                             <Breadcrumb.Item className="home-icon" />
                         </Breadcrumb>
                     </Col>
                     <Col componentClass="span" className="pull-right">
-                        <DropdownButton className="new-req-button" title="New">
+                        <DropdownButton id="request_type" className="new-req-button" title="New">
                             <MenuItem>Product</MenuItem>
                             <MenuItem>Brand</MenuItem>
                             <MenuItem>Experience</MenuItem>

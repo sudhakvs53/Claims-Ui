@@ -1,7 +1,17 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { authenticate, loginSuccess } from './loginActions';
 import PropTypes from 'prop-types'
+import {
+    FormGroup,
+    ControlLabel,
+    FormControl,
+    Button,
+    Panel,
+    Grid,
+    Row,
+    HelpBlock
+} from 'react-bootstrap';
 
 class LoginForm extends React.Component {
     constructor() {
@@ -19,39 +29,48 @@ class LoginForm extends React.Component {
         this.props.dispatch(authenticate(userCreds, this.context.router.history));
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            validationState: this.state.loginMsg
+        });
+    }
     render() {
         return (
-            <form onSubmit={this.onLoginSubmit}>
-                <div>
-                    <label>Username</label>
-                    <div>
-                        <Field
-                            name="username"
-                            component="input"
-                            type="text"
-                            placeholder="Username"
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label>Password</label>
-                        <div>
-                            <Field
-                                name="password"
-                                component="input"
-                                type="password"
-                                placeholder="Password"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" >
-                        Submit
-          </button>
-                </div>
-            </form>
+            <Grid>
+                <Row>
+                    <form onSubmit={this.onLoginSubmit}>
+                        <Panel id="login-panel">
+                            <Panel.Heading>
+                                Login
+                            </Panel.Heading>
+                            <Panel.Body>
+                                <FormGroup>
+                                    <FormControl
+                                        name="username"
+                                        type="text"
+                                        placeholder="Username"
+                                        required
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <FormControl
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                        required
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Button bsStyle="primary" type="submit">
+                                        Submit
+                                </Button>
+                                </FormGroup>
+                                <FormControl.Feedback />
+                            </Panel.Body>
+                        </Panel>
+                    </form >
+                </Row>
+            </Grid>
         )
     }
 }
