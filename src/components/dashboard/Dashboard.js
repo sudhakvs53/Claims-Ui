@@ -25,7 +25,9 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchAllClaims();
+        this
+            .props
+            .fetchAllClaims();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -34,23 +36,32 @@ class Dashboard extends React.Component {
         }
     }
 
+    onMenuItemClick = () => {
+        this
+            .props
+            .history
+            .push({ pathname: '/createClaim' })
+    }
+
     render() {
         return (
-            <Grid style={{ width: "100%" }}>
+            <Grid style={{
+                width: "100%"
+            }}>
                 <Row >
                     <Header />
                 </Row>
                 <Row className="sub-nav">
-                    <Col componentClass="span" >
-                        <Breadcrumb className="breadcrumbs">
+                    <Col componentClass="span">
+                        <Breadcrumb pullRight className="breadcrumbs">
                             <Breadcrumb.Item className="home-icon" />
                         </Breadcrumb>
                     </Col>
                     <Col componentClass="span" className="pull-right">
-                        <DropdownButton id="request_type" className="new-req-button" title="New">
-                            <MenuItem>Product</MenuItem>
-                            <MenuItem>Brand</MenuItem>
-                            <MenuItem>Experience</MenuItem>
+                        <DropdownButton className="new-req-button" id="request_type" title="New">
+                            <MenuItem onSelect={this.onMenuItemClick}>Product</MenuItem>
+                            <MenuItem onSelect={this.onMenuItemClick}>Brand</MenuItem>
+                            <MenuItem onSelect={this.onMenuItemClick}>Experience</MenuItem>
                         </DropdownButton>
                     </Col>
                 </Row>
@@ -61,7 +72,6 @@ class Dashboard extends React.Component {
         );
     }
 }
-
 
 const mapStateToProps = (state) => {
     return { claims: state.fetchAllClaims };
