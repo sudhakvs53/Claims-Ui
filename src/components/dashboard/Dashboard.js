@@ -4,9 +4,9 @@ import 'ag-grid/dist/styles/theme-fresh.css';
 import ReactTooltip from 'react-tooltip';
 import MainGrid from './mainGrid';
 import Header from './Header.js';
-import { fetchAllClaims } from '../../actions/claimsAction';
-import { bindActionCreators } from "redux";
-import { connect } from 'react-redux';
+import {fetchAllClaims} from '../../actions/claimsAction';
+import {bindActionCreators} from "redux";
+import {connect} from 'react-redux';
 import {
     Grid,
     Row,
@@ -25,46 +25,56 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchAllClaims();
+        this
+            .props
+            .fetchAllClaims();
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.claims.claimsFetched) {
-            this.setState({ data: nextProps.claims.data });
+            this.setState({data: nextProps.claims.data});
         }
+    }
+
+    onMenuItemClick = () => {
+        this
+            .props
+            .history
+            .push({pathname: '/createClaim'})
     }
 
     render() {
         return (
-            <Grid style={{ width: "100%" }}>
+            <Grid style={{
+                width: "100%"
+            }}>
                 <Row >
-                    <Header />
+                    <Header/>
                 </Row>
                 <Row className="sub-nav">
-                    <Col componentClass="span" >
+                    <Col componentClass="span">
                         <Breadcrumb pullRight className="breadcrumbs">
-                            <Breadcrumb.Item className="home-icon" />
+                            <Breadcrumb.Item className="home-icon"/>
                         </Breadcrumb>
                     </Col>
                     <Col componentClass="span" className="pull-right">
                         <DropdownButton className="new-req-button" title="New">
-                            <MenuItem>Product</MenuItem>
-                            <MenuItem>Brand</MenuItem>
-                            <MenuItem>Experience</MenuItem>
+                            <MenuItem onSelect={this.onMenuItemClick}>Product</MenuItem>
+                            <MenuItem onSelect={this.onMenuItemClick}>Brand</MenuItem>
+                            <MenuItem onSelect={this.onMenuItemClick}>Experience</MenuItem>
                         </DropdownButton>
                     </Col>
                 </Row>
                 <Row>
-                    <MainGrid server={this.state.data} />
+                    <MainGrid server={this.state.data}/>
                 </Row>
             </Grid >
         );
     }
 }
 
-
 const mapStateToProps = (state) => {
-    return { claims: state.fetchAllClaims };
+    return {claims: state.fetchAllClaims};
 };
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
