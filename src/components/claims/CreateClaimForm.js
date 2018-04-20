@@ -175,7 +175,7 @@ class CreateClaimForm extends Component {
             <Breadcrumb.Item href="http://localhost:8081/dashboard">
               <Image className="homeIcon"/>
             </Breadcrumb.Item>
-            <Breadcrumb.Item href="http://localhost:8081/dashboard">Create Claims</Breadcrumb.Item>
+            <Breadcrumb.Item>Create Claims</Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <div
