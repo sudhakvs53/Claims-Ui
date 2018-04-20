@@ -7,6 +7,14 @@ import Header from './Header.js';
 import { fetchAllClaims } from '../../actions/claimsAction';
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import {
+    Grid,
+    Row,
+    Col,
+    Breadcrumb,
+    DropdownButton,
+    MenuItem
+} from 'react-bootstrap';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -27,12 +35,29 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        return (<div className="wrapper_grid">
-            <Header />
-            <div className="grid_container">
-                <MainGrid server={this.state.data} />
-            </div>
-        </div>
+        return (
+            <Grid style={{ width: "100%" }}>
+                <Row >
+                    <Header />
+                </Row>
+                <Row className="sub-nav">
+                    <Col componentClass="span" >
+                        <Breadcrumb pullRight className="breadcrumbs">
+                            <Breadcrumb.Item className="home-icon" />
+                        </Breadcrumb>
+                    </Col>
+                    <Col componentClass="span" className="pull-right">
+                        <DropdownButton className="new-req-button" title="New">
+                            <MenuItem>Product</MenuItem>
+                            <MenuItem>Brand</MenuItem>
+                            <MenuItem>Experience</MenuItem>
+                        </DropdownButton>
+                    </Col>
+                </Row>
+                <Row>
+                    <MainGrid server={this.state.data} />
+                </Row>
+            </Grid >
         );
     }
 }
