@@ -481,7 +481,7 @@ body{
     margin: 50px
 }
 
-#login-panel input, button{
+.login-field {
     width: 80%;
     margin-left: 10%;
 }

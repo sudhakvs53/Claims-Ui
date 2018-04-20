@@ -50,6 +50,7 @@ class LoginForm extends React.Component {
                                         type="text"
                                         placeholder="Username"
                                         required
+                                        className="login-field"
                                     />
                                 </FormGroup>
                                 <FormGroup>
@@ -58,10 +59,11 @@ class LoginForm extends React.Component {
                                         type="password"
                                         placeholder="Password"
                                         required
+                                        className="login-field"
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Button bsStyle="primary" type="submit">
+                                    <Button bsStyle="primary" type="submit" className="login-field">
                                         Submit
                                 </Button>
                                 </FormGroup>
