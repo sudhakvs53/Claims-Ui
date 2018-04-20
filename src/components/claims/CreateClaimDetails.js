@@ -61,7 +61,7 @@ class CreateClaimDetails extends React.Component {
             claimsTabClicked: "true",
             commentsTabClicked: "false",
             historyTabClicked: "false",
-            showAddClaimLink: "false",
+            //showAddClaimLink: "false",
             displayClaimDetails: "false",
             prjClaimDetails: [],
             titleValue: '',
@@ -204,22 +204,23 @@ class CreateClaimDetails extends React.Component {
     commentsTabHandler = (e) => {
         this.setState({commentsTabClicked: "true"});
         this.setState({claimsTabClicked: "false"});
-        this.setState({showAddClaimLink: "false"});
+        this.setState({displayClaimDetails: "false"});
+        //this.setState({showAddClaimLink: "false"});
         this.setState({historyTabClicked: "false"});
     }
 
     claimsTabHandler = (e) => {
         this.setState({claimsTabClicked: "false"});
-        this.setState({showAddClaimLink: "true"});
+        //this.setState({showAddClaimLink: "true"});
         this.setState({commentsTabClicked: "false"});
         this.setState({historyTabClicked: "false"});
-        this.setState({displayClaimDetails: "false"});
+        this.setState({displayClaimDetails: "true"});
     }
 
     historyTabHandler = (e) => {
 
         this.setState({claimsTabClicked: "false"});
-        this.setState({showAddClaimLink: "false"});
+        //this.setState({showAddClaimLink: "false"});
         this.setState({commentsTabClicked: "false"});
         this.setState({historyTabClicked: "true"});
         this.setState({displayClaimDetails: "false"});
@@ -228,10 +229,10 @@ class CreateClaimDetails extends React.Component {
 
     handleAddNewClaim = (e) => {
         this.setState({claimsTabClicked: "true"});
-        this.setState({showAddClaimLink: "false"});
+        //this.setState({showAddClaimLink: "false"});
+        this.setState({displayClaimDetails: "false"});
         this.setState({displaySubstantiationTable: "false"});
         this.setState({hideSubstantiationTxtArea: "false"});
-        this.setState({displayClaimDetails: "false"});
         this.setState({
             claim: '',
             benefitArea: '',
@@ -393,7 +394,7 @@ class CreateClaimDetails extends React.Component {
                         <Button className="btnClass">Cancel</Button>
                     </div>
                     <div>
-                        {this.state.showAddClaimLink == "true" && <div>
+                        {/* {this.state.showAddClaimLink == "true" && <div>
                             <hr/>
                             <Form horizontal>
                                 <span>+</span>
@@ -401,7 +402,7 @@ class CreateClaimDetails extends React.Component {
                                     Add New Claim</span>
                             </Form>
                         </div>
-}
+} */}
                         {this.state.displayClaimDetails == "true" && <div>
                             <hr/>
                             <Form horizontal>
@@ -431,7 +432,7 @@ class CreateClaimDetails extends React.Component {
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <table className="subTable2">
+                                            {claims.substantiation != '' && <table className="subTable2">
                                                 <tbody>
                                                     <tr>
                                                         <th className="subheader">Substantiation</th>
@@ -454,6 +455,7 @@ class CreateClaimDetails extends React.Component {
                                                         ))}
                                                 </tbody>
                                             </table>
+}
                                         </div>
                                     ))}
                             </Form>
