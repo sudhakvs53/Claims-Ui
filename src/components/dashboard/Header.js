@@ -18,7 +18,7 @@ const style = {
     position: 'fixed',
     width: '100%',
     'z-index': '101'
-}
+};
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ export default class Header extends React.Component {
             <div>
                 <Navbar className="navbar">
                     <Navbar.Header>
-                        <Navbar.Brand className="claim-logo" />
+                        <Navbar.Brand className="claim-logo"/>
                         <Navbar.Text>CLAIM MANAGEMENT</Navbar.Text>
                     </Navbar.Header>
                     <Nav>
@@ -44,24 +44,29 @@ export default class Header extends React.Component {
                                 <option>Legacy Document</option>
                             </FormControl>
                             <FormGroup>
-                                <FormControl className="claim-searchtext pull-left" type="text" placeholder="Enter Keywords" />
-                                <Button onClick={this.handleBasicSearch} className="btn btn-default claim-index-search-button pull-left" >
-                                    <i className="glyphicon glyphicon-search" />
+                                <FormControl
+                                    className="claim-searchtext pull-left"
+                                    type="text"
+                                    placeholder="Enter Keywords"/>
+                                <Button
+                                    onClick={this.handleBasicSearch}
+                                    className="btn btn-default claim-index-search-button pull-left">
+                                    <i className="glyphicon glyphicon-search"/>
                                 </Button>
                             </FormGroup>
                         </Navbar.Form>
                     </Nav>
                     <Nav pullRight>
 
-                        <Navbar.Text className="user-icon" />
+                        <Navbar.Text className="user-icon"/>
                         <NavDropdown id="profile_drop" title="rensetty" className="user-dropdown">
                             <MenuItem>Sign Out</MenuItem>
                         </NavDropdown>
-                        <Navbar.Text className="question" />
+                        <Navbar.Text className="question"/>
                         <Navbar.Text className="help-link">
-                            <Navbar.Link href="https://myapps.psso.its.jnj.com/ppolicy/legal.jsp" >
+                            <Navbar.Link href="https://myapps.psso.its.jnj.com/ppolicy/legal.jsp">
                                 Help
-                        </Navbar.Link>
+                            </Navbar.Link>
                         </Navbar.Text>
                     </Nav>
                 </Navbar>

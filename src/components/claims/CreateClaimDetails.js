@@ -76,7 +76,24 @@ class CreateClaimDetails extends React.Component {
             region: '',
             exception: ''
 
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        if (nextProps.clmData.hasSaved) {
+            if (nextProps.clmData.claim_id != '' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
+                this.props.fetchClaims(this.state.projectId);
+            
+            if (nextProps.fetchClmData.hasClaimsFetched) {
+                this.setState({prjClaimDetails: nextProps.fetchClmData.data});
+                this.setState({displayClaimDetails: "true"});
+                this.setState({claimsTabClicked: "false"});
+                nextProps.fetchClmData.hasClaimsFetched = false;
+            }
+
         }
+
     }
 
     handleClaim = (e) => {
@@ -84,7 +101,7 @@ class CreateClaimDetails extends React.Component {
     }
 
     handleBenefitArea = (e) => {
-        var benefitAreaVal = this.props.claimHdrData[3].BenefitArea[e.target.value];
+        let benefitAreaVal = this.props.claimHdrData[3].BenefitArea[e.target.value];
         this.setState({benefitArea: benefitAreaVal});
     }
 
@@ -128,16 +145,16 @@ class CreateClaimDetails extends React.Component {
     handleListItemSelection = (key) => {
 
         if (this.state.selectedRegionKey == key) 
-            return 'active'
-
+            return 'active';
+        
         return "";
     }
 
     handleFileUploadOptionSelection = (key) => {
 
         if (this.state.selectedFileUpload == key) 
-            return 'active'
-
+            return 'active';
+        
         return "";
     }
 
@@ -183,9 +200,7 @@ class CreateClaimDetails extends React.Component {
                 .state
                 .substantiationArray
                 .concat(this.state.substantiationVal)
-        })
-        console.log("substantiationArray" + this.state.substantiationArray);
-
+        });
     }
 
     handleAddSubstantiation = (e) => {
@@ -240,7 +255,7 @@ class CreateClaimDetails extends React.Component {
             exception: '',
             substantiationVal: '',
             substantiationArray: []
-        })
+        });
     }
 
     handleComments = (e) => {
@@ -250,7 +265,7 @@ class CreateClaimDetails extends React.Component {
 
     handleCreateClaim = (e) => {
 
-        var claimObject = {
+        let claimObject = {
 
             project_title: this.props.location.state.projTitle,
             need_state: this.state.needStateVal,
@@ -268,16 +283,16 @@ class CreateClaimDetails extends React.Component {
             modified_on: "2018-02-27T11:22:00.738Z",
             project_id: this.state.projectId,
             project_status: "In Progress"
-        }
+        };
 
-        var histObject = {
+        const histObject = {
             claim_id: '',
             claim_name: this.state.claim,
             description: "des1",
             modified_on: "2018-02-28"
-        }
+        };
 
-        var commentObject = {
+        const commentObject = {
             claim_id: '',
             comment_id: "1234",
             claim_name: this.state.claim,
@@ -285,14 +300,14 @@ class CreateClaimDetails extends React.Component {
             commented_by: "ldapadmin1",
             commented_on: "2018-02-28T11:22:00.738Z",
             comment_text: this.state.comments
-        }
+        };
 
-        var substObject = {
+        const substObject = {
             substantiation_id: '',
             claim_id: '',
             reason: this.state.substantiationArray,
             supp_docs: ''
-        }
+        };
 
         this
             .props
@@ -305,28 +320,11 @@ class CreateClaimDetails extends React.Component {
         // console.log("substantiationVal: "+this.state.substantiationVal);
     }
 
-    componentWillReceiveProps(nextProps) {
-
-        if (nextProps.clmData.hasSaved) {
-            if (nextProps.clmData.claim_id != '' && !nextProps.fetchClmData.claimsFetching && !nextProps.fetchClmData.hasClaimsFetched) 
-                this.props.fetchClaims(this.state.projectId);
-            
-            if (nextProps.fetchClmData.hasClaimsFetched) {
-                this.setState({prjClaimDetails: nextProps.fetchClmData.data});
-                this.setState({displayClaimDetails: "true"});
-                this.setState({claimsTabClicked: "false"});
-                nextProps.fetchClmData.hasClaimsFetched = false;
-            }
-
-        }
-
-    }
-
     render() {
         return (
             <div className="class1">
                 <div>
-                    <span className="pull-left clmslogo"></span>
+                    <span className="pull-left clmslogo"/>
                     <h4 className="titleClass1">CLAIM MANAGEMENT</h4>
                 </div>
                 <div className="class2">
@@ -340,19 +338,19 @@ class CreateClaimDetails extends React.Component {
                 <div>
                     <div className="pull-right statusClass">
                         <span className="spanclass1">
-                            <span className="statusImg"></span>
+                            <span className="statusImg"/>
                             <span className="bottomText">Status</span>
                         </span>
                         <span className="spanclass">
-                            <span className="claimImg" onClick={this.claimsTabHandler}></span>
+                            <span className="claimImg" onClick={this.claimsTabHandler}/>
                             <span className="claimBottomText">Claim</span>
                         </span>
                         <span className="spanclass">
-                            <span className="historyImg" onClick={this.historyTabHandler}></span>
+                            <span className="historyImg" onClick={this.historyTabHandler}/>
                             <span className="bottomText">History</span>
                         </span>
                         <span className="spanclass">
-                            <span className="commentsImg" onClick={this.commentsTabHandler}></span>
+                            <span className="commentsImg" onClick={this.commentsTabHandler}/>
                             <span className="bottomText">Comments</span>
                         </span>
                     </div>
@@ -430,7 +428,7 @@ class CreateClaimDetails extends React.Component {
                                                         <td className="tdclass1">{claims.claim_name}</td>
                                                         <td className="tdclass1">{claims.benefit_area}</td>
                                                         <td className="tdclass1">{claims.region}</td>
-                                                        <td className="tdclass1"></td>
+                                                        <td className="tdclass1"/>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -449,10 +447,10 @@ class CreateClaimDetails extends React.Component {
 
                                                             <tr key={substantiations}>
                                                                 <td className="tdclass">{substantiations}</td>
-                                                                <td className="tdclass"></td>
-                                                                <td className="tdclass"></td>
-                                                                <td className="tdclass"></td>
-                                                                <td className="tdclass"></td>
+                                                                <td className="tdclass"/>
+                                                                <td className="tdclass"/>
+                                                                <td className="tdclass"/>
+                                                                <td className="tdclass"/>
                                                             </tr>
                                                         ))}
                                                 </tbody>
@@ -761,10 +759,10 @@ class CreateClaimDetails extends React.Component {
                                                     .map(substantiations => (
                                                         <tr key={substantiations}>
                                                             <td className="tdclass">{substantiations}</td>
-                                                            <td className="tdclass"></td>
-                                                            <td className="tdclass"></td>
-                                                            <td className="tdclass"></td>
-                                                            <td className="tdclass"></td>
+                                                            <td className="tdclass"/>
+                                                            <td className="tdclass"/>
+                                                            <td className="tdclass"/>
+                                                            <td className="tdclass"/>
                                                         </tr>
                                                     ))}
 

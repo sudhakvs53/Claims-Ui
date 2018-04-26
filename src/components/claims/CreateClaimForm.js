@@ -50,12 +50,37 @@ class CreateClaimForm extends Component {
       projTitle: '',
       needState: '',
       prdctForm: ''
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps.prjData.hasPrjCreated) {
+
+      if (this.handleButton() === "disabled") 
+        return false;
+      
+      this
+        .props
+        .history
+        .push({
+          pathname: '/claimDetails',
+          state: {
+            projTitle: this.state.projTitle,
+            needState: this.state.needState,
+            prdctForm: this.state.prdctForm,
+            claimType: this.state.selectedClaimType,
+            projectId: nextProps.prjData.prjId
+          }
+        });
+
     }
+
   }
 
   onMenuItemClick(e) {
 
-    this.setState({projTitle: '', needState: '', prdctForm: ''})
+    this.setState({projTitle: '', needState: '', prdctForm: ''});
 
     this.setState({selectedClaimType: e});
 
@@ -87,8 +112,8 @@ class CreateClaimForm extends Component {
   handleListItemSelection = (key) => {
 
     if (this.state.selectedClaimType == key) 
-      return 'active'
-
+      return 'active';
+    
     return "";
   }
 
@@ -104,38 +129,13 @@ class CreateClaimForm extends Component {
 
     }
   
-  componentWillReceiveProps(nextProps) {
-
-    if (nextProps.prjData.hasPrjCreated) {
-
-      if (this.handleButton() === "disabled") 
-        return false;
-      
-      this
-        .props
-        .history
-        .push({
-          pathname: '/claimDetails',
-          state: {
-            projTitle: this.state.projTitle,
-            needState: this.state.needState,
-            prdctForm: this.state.prdctForm,
-            claimType: this.state.selectedClaimType,
-            projectId: nextProps.prjData.prjId
-          }
-        })
-
-    }
-
-  }
-
   moveToClaimDetails = () => {
 
-    var needStateVal = this.props.claimHdrData[0].NeedState[this.state.needState];
-    var prdctFormVal = this.props.claimHdrData[1].PrdctForm[this.state.prdctForm];
-    var claimType = this.props.claimHdrData[2].ClaimType[this.state.selectedClaimType];
+    let needStateVal = this.props.claimHdrData[0].NeedState[this.state.needState];
+    let prdctFormVal = this.props.claimHdrData[1].PrdctForm[this.state.prdctForm];
+    let claimType = this.props.claimHdrData[2].ClaimType[this.state.selectedClaimType];
 
-    var prjObject = {
+    const prjObject = {
 
       project_id: '',
       project_title: this.state.projTitle,
@@ -148,7 +148,7 @@ class CreateClaimForm extends Component {
       modified_by: "ldapadmin1",
       modified_on: "2018-04-02T11:22:00.738Z"
 
-    }
+    };
 
     this
       .props
@@ -160,14 +160,19 @@ class CreateClaimForm extends Component {
     this
       .props
       .history
-      .push({pathname: '/dashboard'})
+      .push({pathname: '/dashboard'});
   }
 
+  getPrjValidation = () => {
+    if (this.state.projTitle == '') 
+      return 'error';
+    }
+  
   render() {
     return (
       <div className="class1">
         <div>
-          <span className="pull-left clmslogo"></span>
+          <span className="pull-left clmslogo"/>
           <h4 className="titleClass1">CLAIM MANAGEMENT</h4>
         </div>
         <div className="class2">
@@ -208,7 +213,9 @@ class CreateClaimForm extends Component {
           <div className="form-class">
             <Col sm={8}>
               <Form horizontal className="form-class1">
-                <FormGroup controlId="formHorizontalProjTitle">
+                <FormGroup
+                  controlId="formHorizontalProjTitle"
+                  validationState={this.getPrjValidation()}>
                   <Col componentClass={ControlLabel} sm={2}>
                     Project Title:
                   </Col>
@@ -310,7 +317,7 @@ class CreateClaimForm extends Component {
                     type="submit"
                     className={this.handleButton()}
                     bsStyle="primary"
-                    onClick={() => this.moveToClaimDetails()}>Create New Claim</Button>
+                    onClick={this.moveToClaimDetails}>Create New Claim</Button>
                   <Button type="submit" className="btnClass">Cancel</Button>
                 </Col>
               </ButtonToolbar>

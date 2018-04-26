@@ -1,7 +1,7 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
-import { authenticate, loginSuccess } from './loginActions';
-import PropTypes from 'prop-types'
+import {reduxForm} from 'redux-form';
+import {authenticate, loginSuccess} from './loginActions';
+import PropTypes from 'prop-types';
 import {
     FormGroup,
     ControlLabel,
@@ -16,24 +16,30 @@ import {
 class LoginForm extends React.Component {
     constructor() {
         super();
-        this.onLoginSubmit = this.onLoginSubmit.bind(this);
+        this.onLoginSubmit = this
+            .onLoginSubmit
+            .bind(this);
     }
 
     static contextTypes = {
         router: PropTypes.object
     }
 
-    onLoginSubmit(event) {
-        event.preventDefault();
-        let userCreds = { username: event.target.username.value, password: event.target.password.value };
-        this.props.dispatch(authenticate(userCreds, this.context.router.history));
+    componentWillReceiveProps(nextProps) {
+        this.setState({validationState: this.state.loginMsg});
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            validationState: this.state.loginMsg
-        });
+    onLoginSubmit(event) {
+        event.preventDefault();
+        let userCreds = {
+            username: event.target.username.value,
+            password: event.target.password.value
+        };
+        this
+            .props
+            .dispatch(authenticate(userCreds, this.context.router.history));
     }
+
     render() {
         return (
             <Grid>
@@ -50,8 +56,7 @@ class LoginForm extends React.Component {
                                         type="text"
                                         placeholder="Username"
                                         required
-                                        className="login-field"
-                                    />
+                                        className="login-field"/>
                                 </FormGroup>
                                 <FormGroup>
                                     <FormControl
@@ -59,24 +64,21 @@ class LoginForm extends React.Component {
                                         type="password"
                                         placeholder="Password"
                                         required
-                                        className="login-field"
-                                    />
+                                        className="login-field"/>
                                 </FormGroup>
                                 <FormGroup>
                                     <Button bsStyle="primary" type="submit" className="login-field">
                                         Submit
-                                </Button>
+                                    </Button>
                                 </FormGroup>
-                                <FormControl.Feedback />
+                                <FormControl.Feedback/>
                             </Panel.Body>
                         </Panel>
                     </form >
                 </Row>
             </Grid>
-        )
+        );
     }
 }
 
-export default reduxForm({
-    form: 'simple'
-})(LoginForm);
+export default reduxForm({form: 'simple'})(LoginForm);

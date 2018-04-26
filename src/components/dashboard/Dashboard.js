@@ -4,9 +4,9 @@ import 'ag-grid/dist/styles/theme-fresh.css';
 import ReactTooltip from 'react-tooltip';
 import MainGrid from './mainGrid';
 import Header from './Header.js';
-import { fetchAllClaims } from '../../actions/claimsAction';
-import { bindActionCreators } from "redux";
-import { connect } from 'react-redux';
+import {fetchAllClaims} from '../../actions/claimsAction';
+import {bindActionCreators} from "redux";
+import {connect} from 'react-redux';
 import {
     Grid,
     Row,
@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.claims.claimsFetched) {
-            this.setState({ data: nextProps.claims.data });
+            this.setState({data: nextProps.claims.data});
         }
     }
 
@@ -40,7 +40,7 @@ class Dashboard extends React.Component {
         this
             .props
             .history
-            .push({ pathname: '/createClaim' })
+            .push({pathname: '/createClaim'});
     }
 
     render() {
@@ -49,12 +49,12 @@ class Dashboard extends React.Component {
                 width: "100%"
             }}>
                 <Row >
-                    <Header />
+                    <Header/>
                 </Row>
                 <Row className="sub-nav">
                     <Col componentClass="span">
                         <Breadcrumb pullRight className="breadcrumbs">
-                            <Breadcrumb.Item className="home-icon" />
+                            <Breadcrumb.Item className="home-icon"/>
                         </Breadcrumb>
                     </Col>
                     <Col componentClass="span" className="pull-right">
@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <MainGrid server={this.state.data} />
+                    <MainGrid server={this.state.data}/>
                 </Row>
             </Grid >
         );
@@ -74,7 +74,7 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { claims: state.fetchAllClaims };
+    return {claims: state.fetchAllClaims};
 };
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
