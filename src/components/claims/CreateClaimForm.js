@@ -163,11 +163,6 @@ class CreateClaimForm extends Component {
       .push({pathname: '/dashboard'});
   }
 
-  getPrjValidation = () => {
-    if (this.state.projTitle == '') 
-      return 'error';
-    }
-  
   render() {
     return (
       <div className="class1">
@@ -213,9 +208,7 @@ class CreateClaimForm extends Component {
           <div className="form-class">
             <Col sm={8}>
               <Form horizontal className="form-class1">
-                <FormGroup
-                  controlId="formHorizontalProjTitle"
-                  validationState={this.getPrjValidation()}>
+                <FormGroup controlId="formHorizontalProjTitle">
                   <Col componentClass={ControlLabel} sm={2}>
                     Project Title:
                   </Col>

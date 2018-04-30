@@ -14,15 +14,16 @@ import {
 } from 'react-bootstrap';
 
 class LoginForm extends React.Component {
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
+
     constructor() {
         super();
         this.onLoginSubmit = this
             .onLoginSubmit
             .bind(this);
-    }
-
-    static contextTypes = {
-        router: PropTypes.object
     }
 
     componentWillReceiveProps(nextProps) {

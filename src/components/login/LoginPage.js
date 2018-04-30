@@ -7,12 +7,12 @@ class LoginPage extends React.Component {
     super();
   }
 
-  render() {    
+  render() {
     return (
       <div>
-        <LoginForm />
+        <LoginForm/>
       </div>
-    )
+    );
   }
 }
 
